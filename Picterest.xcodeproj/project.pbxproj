@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01190522288ED0900087B36B /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190521288ED0900087B36B /* ImageCacheManager.swift */; };
 		019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD8288E428D00A47E5C /* PhotosViewController.swift */; };
 		019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BDA288E429200A47E5C /* SavedViewController.swift */; };
 		019B1BDD288E6DF700A47E5C /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BDC288E6DF700A47E5C /* PhotoCollectionViewCell.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01190521288ED0900087B36B /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		019B1BD8288E428D00A47E5C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		019B1BDA288E429200A47E5C /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		019B1BDC288E6DF700A47E5C /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01190523288ED0930087B36B /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				01190521288ED0900087B36B /* ImageCacheManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		019B1BD4288E3D7600A47E5C /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 				019B1BDE288E6DFA00A47E5C /* View */,
 				019B1BD7288E3DA400A47E5C /* ViewController */,
 				01E22DA5288E8E2600F46475 /* ViewModel */,
+				01190523288ED0930087B36B /* Manager */,
 				01E22D99288E834B00F46475 /* Network */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
@@ -224,6 +235,7 @@
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				01E22D9F288E836000F46475 /* NetworkManager.swift in Sources */,
 				01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */,
+				01190522288ED0900087B36B /* ImageCacheManager.swift in Sources */,
 				01E22D9D288E835A00F46475 /* APIEndpoints.swift in Sources */,
 				01E22D98288E834800F46475 /* HttpMethod.swift in Sources */,
 				019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */,
