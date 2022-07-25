@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		019B1BD6288E3D9C00A47E5C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD5288E3D9C00A47E5C /* MainTabBarController.swift */; };
+		019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD8288E428D00A47E5C /* PhotosViewController.swift */; };
+		019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BDA288E429200A47E5C /* SavedViewController.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 
 /* Begin PBXFileReference section */
 		019B1BD5288E3D9C00A47E5C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		019B1BD8288E428D00A47E5C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		019B1BDA288E429200A47E5C /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* Picterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 			isa = PBXGroup;
 			children = (
 				019B1BD5288E3D9C00A47E5C /* MainTabBarController.swift */,
+				019B1BD8288E428D00A47E5C /* PhotosViewController.swift */,
+				019B1BDA288E429200A47E5C /* SavedViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -151,7 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
+				019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
+				019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */,
 				019B1BD6288E3D9C00A47E5C /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
