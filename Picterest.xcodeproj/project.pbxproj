@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		019B1BD6288E3D9C00A47E5C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD5288E3D9C00A47E5C /* MainTabBarController.swift */; };
 		019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD8288E428D00A47E5C /* PhotosViewController.swift */; };
 		019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BDA288E429200A47E5C /* SavedViewController.swift */; };
 		019B1BDD288E6DF700A47E5C /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BDC288E6DF700A47E5C /* PhotoCollectionViewCell.swift */; };
-		01E22D94288E787200F46475 /* PhotoImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E22D93288E787200F46475 /* PhotoImageView.xib */; };
-		01E22D96288E7ABA00F46475 /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D95288E7ABA00F46475 /* PhotoImageView.swift */; };
 		01E22D98288E834800F46475 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D97288E834800F46475 /* HttpMethod.swift */; };
 		01E22D9B288E835300F46475 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D9A288E835300F46475 /* Endpoint.swift */; };
 		01E22D9D288E835A00F46475 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D9C288E835A00F46475 /* APIEndpoints.swift */; };
@@ -20,6 +17,8 @@
 		01E22DA1288E89BA00F46475 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA0288E89BA00F46475 /* Constants.swift */; };
 		01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */; };
 		01E22DA7288E8F8000F46475 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA6288E8F8000F46475 /* Photo.swift */; };
+		01E22DA9288EA00800F46475 /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA8288EA00800F46475 /* LazyImageView.swift */; };
+		01E22DAB288EC15500F46475 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E22DAA288EC15500F46475 /* Main.storyboard */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
@@ -27,12 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		019B1BD5288E3D9C00A47E5C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		019B1BD8288E428D00A47E5C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		019B1BDA288E429200A47E5C /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		019B1BDC288E6DF700A47E5C /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		01E22D93288E787200F46475 /* PhotoImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoImageView.xib; sourceTree = "<group>"; };
-		01E22D95288E7ABA00F46475 /* PhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
 		01E22D97288E834800F46475 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		01E22D9A288E835300F46475 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		01E22D9C288E835A00F46475 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
@@ -40,6 +36,8 @@
 		01E22DA0288E89BA00F46475 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		01E22DA6288E8F8000F46475 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		01E22DA8288EA00800F46475 /* LazyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
+		01E22DAA288EC15500F46475 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* Picterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +64,7 @@
 				DE15E65D28604278003DD2F5 /* SceneDelegate.swift */,
 				DE15E66428604279003DD2F5 /* Assets.xcassets */,
 				DE15E66628604279003DD2F5 /* LaunchScreen.storyboard */,
+				01E22DAA288EC15500F46475 /* Main.storyboard */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -73,7 +72,6 @@
 		019B1BD7288E3DA400A47E5C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				019B1BD5288E3D9C00A47E5C /* MainTabBarController.swift */,
 				019B1BD8288E428D00A47E5C /* PhotosViewController.swift */,
 				019B1BDA288E429200A47E5C /* SavedViewController.swift */,
 			);
@@ -84,8 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				019B1BDC288E6DF700A47E5C /* PhotoCollectionViewCell.swift */,
-				01E22D93288E787200F46475 /* PhotoImageView.xib */,
-				01E22D95288E7ABA00F46475 /* PhotoImageView.swift */,
+				01E22DA8288EA00800F46475 /* LazyImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,9 +203,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01E22D94288E787200F46475 /* PhotoImageView.xib in Resources */,
 				DE15E66828604279003DD2F5 /* LaunchScreen.storyboard in Resources */,
 				DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */,
+				01E22DAB288EC15500F46475 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,15 +219,14 @@
 				01E22DA7288E8F8000F46475 /* Photo.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				01E22D9B288E835300F46475 /* Endpoint.swift in Sources */,
+				01E22DA9288EA00800F46475 /* LazyImageView.swift in Sources */,
 				019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				01E22D9F288E836000F46475 /* NetworkManager.swift in Sources */,
 				01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */,
-				01E22D96288E7ABA00F46475 /* PhotoImageView.swift in Sources */,
 				01E22D9D288E835A00F46475 /* APIEndpoints.swift in Sources */,
 				01E22D98288E834800F46475 /* HttpMethod.swift in Sources */,
 				019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */,
-				019B1BD6288E3D9C00A47E5C /* MainTabBarController.swift in Sources */,
 				019B1BDD288E6DF700A47E5C /* PhotoCollectionViewCell.swift in Sources */,
 				01E22DA1288E89BA00F46475 /* Constants.swift in Sources */,
 			);
@@ -376,6 +372,7 @@
 				INFOPLIST_FILE = Picterest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -405,6 +402,7 @@
 				INFOPLIST_FILE = Picterest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

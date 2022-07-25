@@ -9,12 +9,7 @@ import UIKit
 import Combine
 
 final class PhotosViewController: UIViewController {
-    private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
-        return collectionView
-    }()
+    @IBOutlet weak var collectionView: UICollectionView!
     
     private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -32,27 +27,11 @@ final class PhotosViewController: UIViewController {
 
 extension PhotosViewController {
     private func configure() {
-        addSubViews()
-        makeConstraints()
-        configureDataSource()
+        configureCollectionView()
         bind()
     }
     
-    private func addSubViews() {
-        view.addSubview(collectionView)
-    }
-    
-    private func makeConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
-    }
-    
-    private func configureDataSource() {
+    private func configureCollectionView() {
         collectionView.dataSource = self
     }
     
@@ -79,6 +58,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
         
         let photo = viewModel.photo(at: indexPath.row)
+        cell.configureCell(photo)
         
         return cell
     }
