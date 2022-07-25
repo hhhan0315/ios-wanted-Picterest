@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SavedViewController: UIViewController {
+final class SavedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
