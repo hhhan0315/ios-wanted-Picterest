@@ -8,7 +8,6 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
-    
     enum MainTabBarItem {
         case photo
         case saved

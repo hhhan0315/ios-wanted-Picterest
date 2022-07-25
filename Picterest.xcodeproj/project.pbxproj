@@ -18,6 +18,8 @@
 		01E22D9D288E835A00F46475 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D9C288E835A00F46475 /* APIEndpoints.swift */; };
 		01E22D9F288E836000F46475 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D9E288E836000F46475 /* NetworkManager.swift */; };
 		01E22DA1288E89BA00F46475 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA0288E89BA00F46475 /* Constants.swift */; };
+		01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */; };
+		01E22DA7288E8F8000F46475 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA6288E8F8000F46475 /* Photo.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 		01E22D9C288E835A00F46475 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		01E22D9E288E836000F46475 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		01E22DA0288E89BA00F46475 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
+		01E22DA6288E8F8000F46475 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* Picterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,8 +105,17 @@
 			isa = PBXGroup;
 			children = (
 				01E22DA0288E89BA00F46475 /* Constants.swift */,
+				01E22DA6288E8F8000F46475 /* Photo.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		01E22DA5288E8E2600F46475 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DE15E64F28604278003DD2F5 = {
@@ -128,6 +141,7 @@
 				01E22DA2288E89BC00F46475 /* Model */,
 				019B1BDE288E6DFA00A47E5C /* View */,
 				019B1BD7288E3DA400A47E5C /* ViewController */,
+				01E22DA5288E8E2600F46475 /* ViewModel */,
 				01E22D99288E834B00F46475 /* Network */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 			);
@@ -205,11 +219,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E22DA7288E8F8000F46475 /* Photo.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				01E22D9B288E835300F46475 /* Endpoint.swift in Sources */,
 				019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
 				01E22D9F288E836000F46475 /* NetworkManager.swift in Sources */,
+				01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */,
 				01E22D96288E7ABA00F46475 /* PhotoImageView.swift in Sources */,
 				01E22D9D288E835A00F46475 /* APIEndpoints.swift in Sources */,
 				01E22D98288E834800F46475 /* HttpMethod.swift in Sources */,

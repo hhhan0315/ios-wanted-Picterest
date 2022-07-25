@@ -7,15 +7,14 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case urlRequestError
-    case invalidError
-    case statusCodeError
-    case noData
-    case decodeError
-}
-
 final class NetworkManager {
+    enum NetworkError: Error {
+        case urlRequestError
+        case invalidError
+        case statusCodeError
+        case noData
+        case decodeError
+    }
     
     func fetchData<T: Decodable>(endpoint: Endpoint, dataType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let urlRequest = endpoint.urlRequest() else {
