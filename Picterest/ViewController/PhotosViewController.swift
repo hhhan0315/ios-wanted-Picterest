@@ -36,9 +36,14 @@ final class PhotosViewController: UIViewController {
 
 extension PhotosViewController {
     private func configure() {
+        configureView()
         addSubViews()
         makeConstraints()
         bind()
+    }
+    
+    private func configureView() {
+        view.backgroundColor = .white
     }
     
     private func addSubViews() {
