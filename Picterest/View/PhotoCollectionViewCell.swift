@@ -53,17 +53,6 @@ extension PhotoCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     func configureCell(_ photo: Photo) {
-        let urlString = photo.urls.small
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                DispatchQueue.main.async {
-                    self.imageView.image = UIImage(data: data)
-                }
-            }
-        }.resume()
+        imageView.image = photo.image
     }
 }

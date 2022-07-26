@@ -2,20 +2,13 @@
 //  Photo.swift
 //  Picterest
 //
-//  Created by rae on 2022/07/25.
+//  Created by rae on 2022/07/26.
 //
 
-import Foundation
+import UIKit
 
-struct Photo: Decodable {
-    let id: String
-    let urls: Urls
-}
-
-struct Urls: Decodable {
-    let raw: String
-    let full: String
-    let regular: String
-    let small: String
-    let thumb: String
+struct Photo {
+    var id: String
+    var image: UIImage?
+    var url: String
 }
