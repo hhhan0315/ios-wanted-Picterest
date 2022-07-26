@@ -10,7 +10,10 @@ import Combine
 
 final class PhotosViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = PinterestLayout()
+        layout.delegate = self
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.dataSource = self
         return collectionView
@@ -77,5 +80,18 @@ extension PhotosViewController: UICollectionViewDataSource {
         cell.configureCell(photo)
         
         return cell
+    }
+}
+
+// MARK: - PinterestLayoutDelegate
+
+extension PhotosViewController: PinterestLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let cellWidth: CGFloat = (view.bounds.width - 4) / 2
+        let imageHeight = viewModel.photo(at: indexPath.item).image?.size.height ?? 0
+        let imageWidth = viewModel.photo(at: indexPath.item).image?.size.width ?? 0
+        let imageRatio = imageHeight / imageWidth
+        
+        return CGFloat(imageRatio) * cellWidth
     }
 }
