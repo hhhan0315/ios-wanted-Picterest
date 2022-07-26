@@ -88,10 +88,10 @@ extension PhotosViewController: UICollectionViewDataSource {
 
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        guard indexPath.item >= viewModel.photosCount() - 1 else {
-//            return
-//        }
-//        viewModel.fetch()
+        guard indexPath.item >= viewModel.photosCount() - 1 else {
+            return
+        }
+        viewModel.fetch()
     }
 }
 
