@@ -17,11 +17,12 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let starButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var starButton: UIButton = {
+        let button = UIButton(type: .custom)
         button.tintColor = .white
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.setImage(UIImage(systemName: "star.fill"), for: .selected)
+        button.addTarget(self, action: #selector(touchStarButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -78,7 +79,13 @@ extension PhotoCollectionViewCell {
             topStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             topStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             topStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            topStackView.heightAnchor.constraint(equalToConstant: 30.0),
         ])
+    }
+    
+    @objc private func touchStarButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        sender.tintColor = sender.isSelected ? .systemYellow : .white
     }
 }
 
@@ -88,7 +95,7 @@ extension PhotoCollectionViewCell {
     func configureCell(index: Int, photo: Photo) {
         infoLabel.text = "\(index + 1)번째 사진"
         
-        imageLoadManager.load(photo.urls.small) { [weak self] data in
+        imageLoadManager.load(photo.urls.thumb) { [weak self] data in
             DispatchQueue.main.async {
                 self?.imageView.image = UIImage(data: data)
             }
