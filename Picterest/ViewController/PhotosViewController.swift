@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 final class PhotosViewController: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
     
     private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -32,14 +31,13 @@ extension PhotosViewController {
     }
     
     private func configureCollectionView() {
-        collectionView.dataSource = self
     }
     
     private func bind() {
         viewModel.$photos
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
             }
             .store(in: &cancellable)
     }

@@ -17,9 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // UIWindowScene : Scene의 서브 클래스
         // Scene : 사용자 디바이스 위에 Window 표시, 사용자와 상호작용하는 scene의 생명주기를 관리하는 객체
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
         // UIWindow : ViewController와 함께 일하며 이벤트 핸들링, 앱 작업 기초 수행
         // window에서만 하는 것은 앱 컨텐츠를 제공하는 메인 윈도우 제공, 부가적인 컨텐츠 표시를 위한 추가적인 윈도우 생성
+        let window = UIWindow(windowScene: windowScene)
+        let rootViewController = MainTabBarController()
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
