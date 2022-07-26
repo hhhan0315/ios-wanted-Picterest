@@ -9,6 +9,12 @@ import UIKit
 import Combine
 
 final class PhotosViewController: UIViewController {
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        collectionView.dataSource = self
+        return collectionView
+    }()
     
     private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -26,18 +32,30 @@ final class PhotosViewController: UIViewController {
 
 extension PhotosViewController {
     private func configure() {
-        configureCollectionView()
+        addSubViews()
+        makeConstraints()
         bind()
     }
     
-    private func configureCollectionView() {
+    private func addSubViews() {
+        view.addSubview(collectionView)
+    }
+    
+    private func makeConstraints() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
     private func bind() {
         viewModel.$photos
             .receive(on: DispatchQueue.main)
             .sink { _ in
-//                self.collectionView.reloadData()
+                self.collectionView.reloadData()
             }
             .store(in: &cancellable)
     }

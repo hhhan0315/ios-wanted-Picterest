@@ -34,17 +34,13 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        configureUI()
     }
 }
 
 // MARK: - Private
 
 extension MainTabBarController {
-    private func configure() {
-        configureUI()
-    }
-    
     private func configureUI() {
         let photosTabBarItem = UITabBarItem(title: MainTabBarItem.photo.title, image: MainTabBarItem.photo.image, selectedImage: nil)
         let savedTabBarItem = UITabBarItem(title: MainTabBarItem.saved.title, image: MainTabBarItem.saved.image, selectedImage: nil)
