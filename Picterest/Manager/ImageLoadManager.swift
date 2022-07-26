@@ -18,7 +18,6 @@ final class ImageLoadManager {
         }
         
         if let cachedData = self.imageCacheManager.load(key) {
-            print("cached")
             completion(cachedData)
             return
         }

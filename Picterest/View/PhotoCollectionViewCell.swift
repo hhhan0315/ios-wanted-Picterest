@@ -10,6 +10,8 @@ import UIKit
 final class PhotoCollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: PhotoCollectionViewCell.self)
     
+    private var imageLoadManager = ImageLoadManager()
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
@@ -53,6 +55,10 @@ extension PhotoCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     func configureCell(_ photo: Photo) {
-        imageView.image = photo.image
+        imageLoadManager.load(photo.urls.small) { [weak self] data in
+            DispatchQueue.main.async {
+                self?.imageView.image = UIImage(data: data)
+            }
+        }
     }
 }

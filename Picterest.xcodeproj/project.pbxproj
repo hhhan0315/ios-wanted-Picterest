@@ -10,7 +10,6 @@
 		01190522288ED0900087B36B /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190521288ED0900087B36B /* ImageCacheManager.swift */; };
 		01190541288FAEDF0087B36B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190540288FAEDF0087B36B /* MainTabBarController.swift */; };
 		01190543288FB4E20087B36B /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190542288FB4E20087B36B /* PinterestLayout.swift */; };
-		01190545288FB6C10087B36B /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190544288FB6C10087B36B /* Photo.swift */; };
 		0185CDB2288FD59F00E0666E /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185CDB1288FD59F00E0666E /* ImageLoadManager.swift */; };
 		019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD8288E428D00A47E5C /* PhotosViewController.swift */; };
 		019B1BDB288E429200A47E5C /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BDA288E429200A47E5C /* SavedViewController.swift */; };
@@ -21,7 +20,7 @@
 		01E22D9F288E836000F46475 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22D9E288E836000F46475 /* NetworkManager.swift */; };
 		01E22DA1288E89BA00F46475 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA0288E89BA00F46475 /* Constants.swift */; };
 		01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */; };
-		01E22DA7288E8F8000F46475 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA6288E8F8000F46475 /* PhotoResponse.swift */; };
+		01E22DA7288E8F8000F46475 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E22DA6288E8F8000F46475 /* Photo.swift */; };
 		DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65B28604278003DD2F5 /* AppDelegate.swift */; };
 		DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE15E65D28604278003DD2F5 /* SceneDelegate.swift */; };
 		DE15E66528604279003DD2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE15E66428604279003DD2F5 /* Assets.xcassets */; };
@@ -32,7 +31,6 @@
 		01190521288ED0900087B36B /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		01190540288FAEDF0087B36B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		01190542288FB4E20087B36B /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
-		01190544288FB6C10087B36B /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		0185CDB1288FD59F00E0666E /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		019B1BD8288E428D00A47E5C /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		019B1BDA288E429200A47E5C /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +41,7 @@
 		01E22D9E288E836000F46475 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		01E22DA0288E89BA00F46475 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		01E22DA3288E8E2100F46475 /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
-		01E22DA6288E8F8000F46475 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
+		01E22DA6288E8F8000F46475 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DE15E65828604278003DD2F5 /* Picterest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picterest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE15E65B28604278003DD2F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE15E65D28604278003DD2F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,8 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				01E22DA0288E89BA00F46475 /* Constants.swift */,
-				01E22DA6288E8F8000F46475 /* PhotoResponse.swift */,
-				01190544288FB6C10087B36B /* Photo.swift */,
+				01E22DA6288E8F8000F46475 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,7 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01E22DA7288E8F8000F46475 /* PhotoResponse.swift in Sources */,
+				01E22DA7288E8F8000F46475 /* Photo.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				01190541288FAEDF0087B36B /* MainTabBarController.swift in Sources */,
 				01E22D9B288E835300F46475 /* Endpoint.swift in Sources */,
@@ -250,7 +247,6 @@
 				01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */,
 				01190522288ED0900087B36B /* ImageCacheManager.swift in Sources */,
 				0185CDB2288FD59F00E0666E /* ImageLoadManager.swift in Sources */,
-				01190545288FB6C10087B36B /* Photo.swift in Sources */,
 				01E22D9D288E835A00F46475 /* APIEndpoints.swift in Sources */,
 				01E22D98288E834800F46475 /* HttpMethod.swift in Sources */,
 				01190543288FB4E20087B36B /* PinterestLayout.swift in Sources */,

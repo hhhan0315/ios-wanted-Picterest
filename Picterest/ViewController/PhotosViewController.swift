@@ -16,6 +16,7 @@ final class PhotosViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.dataSource = self
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -83,15 +84,26 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
+
+extension PhotosViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        guard indexPath.item >= viewModel.photosCount() - 1 else {
+//            return
+//        }
+//        viewModel.fetch()
+    }
+}
+
 // MARK: - PinterestLayoutDelegate
 
 extension PhotosViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         let cellWidth: CGFloat = (view.bounds.width - 4) / 2
-        let imageHeight = viewModel.photo(at: indexPath.item).image?.size.height ?? 0
-        let imageWidth = viewModel.photo(at: indexPath.item).image?.size.width ?? 0
+        let imageHeight: CGFloat = CGFloat(viewModel.photo(at: indexPath.item).height)
+        let imageWidth: CGFloat = CGFloat(viewModel.photo(at: indexPath.item).width)
         let imageRatio = imageHeight / imageWidth
         
-        return CGFloat(imageRatio) * cellWidth
+        return imageRatio * cellWidth
     }
 }
