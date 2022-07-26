@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import UIKit
 
 final class PhotosViewModel {
     @Published var photos: [Photo]

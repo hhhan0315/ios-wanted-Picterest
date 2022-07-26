@@ -17,7 +17,9 @@ class PinterestLayout: UICollectionViewLayout {
     private var contentHeight: CGFloat = 0
     
     private var contentWidth: CGFloat {
-        guard let collectionView = collectionView else { return 0 }
+        guard let collectionView = collectionView else {
+            return 0
+        }
         let insets = collectionView.contentInset
         return collectionView.bounds.width - (insets.left + insets.right)
     }
@@ -33,7 +35,9 @@ class PinterestLayout: UICollectionViewLayout {
     // 초기화되거나 뷰가 변경될 때마다 실행
     override func prepare() {
         cache.removeAll()
-        guard cache.isEmpty, let collectionView = collectionView else { return }
+        guard cache.isEmpty, let collectionView = collectionView else {
+            return
+        }
 
         let numberOfColumns: Int = 2
         let cellPadding: CGFloat = 2
