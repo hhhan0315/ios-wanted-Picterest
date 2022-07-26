@@ -13,11 +13,13 @@ final class PhotosViewModel {
     @Published var photos: [Photo]
     private var page: Int
     private let networkManager: NetworkManager
+    private let imageLoadManager: ImageLoadManager
     
     init() {
         self.photos = []
         self.page = 1
         self.networkManager = NetworkManager()
+        self.imageLoadManager = ImageLoadManager()
     }
     
     func photosCount() -> Int {
@@ -33,19 +35,20 @@ final class PhotosViewModel {
         networkManager.fetchData(endpoint: photosEndpoint, dataType: [PhotoResponse].self) { [weak self] result in
             switch result {
             case .success(let photoResponses):
+                var photos: [Photo] = []
+                
                 photoResponses.forEach {
                     var photo = $0.toPhoto()
                     
-                    guard let url = URL(string: photo.url) else {
-                        return
-                    }
-
-                    URLSession.shared.dataTask(with: url) { data, response, error in
-                        if let data = data {
-                            photo.image = UIImage(data: data)
-                            self?.photos.append(photo)
+                    self?.imageLoadManager.load(photo.url) { data in
+                        photo.image = UIImage(data: data)
+                        photos.append(photo)
+                        
+                        if photos.count == 15 {
+                            self?.photos.append(contentsOf: photos)
+                            self?.page += 1
                         }
-                    }.resume()
+                    }
                 }
             case .failure(let error):
                 print(error.localizedDescription)
