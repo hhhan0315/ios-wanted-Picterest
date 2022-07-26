@@ -78,7 +78,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
         
         let photo = viewModel.photo(at: indexPath.row)
-        cell.configureCell(photo)
+        cell.configureCell(index: indexPath.row, photo: photo)
         
         return cell
     }
