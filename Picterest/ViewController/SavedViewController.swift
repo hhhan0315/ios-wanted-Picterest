@@ -6,18 +6,31 @@
 //
 
 import UIKit
+import Combine
 
 final class SavedViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
+        tableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.identifier)
         return tableView
     }()
+    
+    private let viewModel = SavedViewModel()
+    private var cancellable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
+        
+//        viewModel.fetch()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.fetch()
     }
 }
 
@@ -28,6 +41,7 @@ extension SavedViewController {
         configureView()
         addSubviews()
         makeConstraints()
+        bind()
     }
     
     private func configureView() {
@@ -47,16 +61,32 @@ extension SavedViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
+    
+    private func bind() {
+        viewModel.$photoEntities
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.tableView.reloadData()
+            }
+            .store(in: &cancellable)
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension SavedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.photoEntitiesCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return .init()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath) as? PhotoTableViewCell else {
+            return .init()
+        }
+        
+        let photoEntity = viewModel.photoEntity(at: indexPath.row)
+        cell.configureCell(photoEntity: photoEntity)
+        
+        return cell
     }
 }

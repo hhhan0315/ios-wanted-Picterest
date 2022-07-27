@@ -40,18 +40,19 @@ final class ImageFileManager {
         }
     }
     
-    func getSavedImage(id: String) -> UIImage? {
+    func getSavedImageURL(id: String) -> String? {
         guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
             return nil
         }
-        
-        return UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent("\(id).png").path)
+        return directory.appendingPathComponent("\(id).png").path
     }
     
-    func getSavedImageURL(id: String) -> URL? {
-        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
-            return nil
-        }
-        return directory.appendingPathComponent("\(id).png")
+    func getSavedImage(urlString: String) -> UIImage? {
+//        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+//            return nil
+//        }
+//
+//        return UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent("\(id).png").path)
+        return UIImage(contentsOfFile: urlString)
     }
 }

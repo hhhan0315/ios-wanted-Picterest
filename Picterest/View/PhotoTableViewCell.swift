@@ -48,3 +48,15 @@ extension PhotoTableViewCell {
         ])
     }
 }
+
+// MARK: - Public
+
+extension PhotoTableViewCell {
+    func configureCell(photoEntity: PhotoEntity) {
+        guard let urlString = photoEntity.fileURL else {
+            return
+        }
+        print(urlString)
+        photoImageView.image = ImageFileManager.shared.getSavedImage(urlString: urlString)
+    }
+}

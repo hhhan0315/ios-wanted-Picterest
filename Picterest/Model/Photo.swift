@@ -11,6 +11,6 @@ struct Photo {
     let id: String
     let memo: String
     let imageURL: String
-    let fileURL: URL
+    let fileURL: String
     let date: Date
 }

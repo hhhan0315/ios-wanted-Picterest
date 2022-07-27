@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 final class PhotosViewModel {
     @Published var photoResponses: [PhotoResponse]
