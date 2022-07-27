@@ -10,7 +10,7 @@ import Combine
 
 final class PhotosViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
-        let layout = PinterestLayout(numberOfColumns: 2)
+        let layout = PinterestLayout()
         layout.delegate = self
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
