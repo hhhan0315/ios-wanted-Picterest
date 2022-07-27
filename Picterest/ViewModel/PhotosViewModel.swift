@@ -9,30 +9,30 @@ import Foundation
 import Combine
 
 final class PhotosViewModel {
-    @Published var photos: [Photo]
+    @Published var photoResponses: [PhotoResponse]
     private var page: Int
     private let networkManager: NetworkManager
     
     init() {
-        self.photos = []
+        self.photoResponses = []
         self.page = 1
         self.networkManager = NetworkManager()
     }
     
-    func photosCount() -> Int {
-        return photos.count
+    func photoResponsesCount() -> Int {
+        return photoResponses.count
     }
     
-    func photo(at index: Int) -> Photo {
-        return photos[index]
+    func photoResponse(at index: Int) -> PhotoResponse {
+        return photoResponses[index]
     }
     
     func fetch() {
         let photosEndpoint = APIEndpoints.getPhotos(page: page)
-        networkManager.fetchData(endpoint: photosEndpoint, dataType: [Photo].self) { [weak self] result in
+        networkManager.fetchData(endpoint: photosEndpoint, dataType: [PhotoResponse].self) { [weak self] result in
             switch result {
-            case .success(let photos):
-                self?.photos.append(contentsOf: photos)
+            case .success(let photoResponses):
+                self?.photoResponses.append(contentsOf: photoResponses)
                 self?.page += 1
             case .failure(let error):
                 print(error.localizedDescription)

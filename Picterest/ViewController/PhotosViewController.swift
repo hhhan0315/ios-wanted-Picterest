@@ -62,7 +62,7 @@ extension PhotosViewController {
     }
     
     private func bind() {
-        viewModel.$photos
+        viewModel.$photoResponses
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.collectionView.reloadData()
@@ -75,7 +75,7 @@ extension PhotosViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photosCount()
+        return viewModel.photoResponsesCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,8 +83,8 @@ extension PhotosViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let photo = viewModel.photo(at: indexPath.row)
-        cell.configureCell(index: indexPath.row, photo: photo)
+        let photoResponse = viewModel.photoResponse(at: indexPath.row)
+        cell.configureCell(index: indexPath.row, photoResponse: photoResponse)
         cell.delegate = self
         
         return cell
@@ -95,7 +95,7 @@ extension PhotosViewController: UICollectionViewDataSource {
 
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard indexPath.item >= viewModel.photosCount() - 1 else {
+        guard indexPath.item >= viewModel.photoResponsesCount() - 1 else {
             return
         }
         viewModel.fetch()
@@ -107,8 +107,8 @@ extension PhotosViewController: UICollectionViewDelegate {
 extension PhotosViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         let cellWidth: CGFloat = (view.bounds.width - 4) / 2
-        let imageHeight: CGFloat = CGFloat(viewModel.photo(at: indexPath.item).height)
-        let imageWidth: CGFloat = CGFloat(viewModel.photo(at: indexPath.item).width)
+        let imageHeight: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).height)
+        let imageWidth: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).width)
         let imageRatio = imageHeight / imageWidth
         
         return imageRatio * cellWidth

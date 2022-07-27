@@ -101,11 +101,11 @@ extension PhotoCollectionViewCell {
 // MARK: - Public
 
 extension PhotoCollectionViewCell {
-    func configureCell(index: Int, photo: Photo) {
+    func configureCell(index: Int, photoResponse: PhotoResponse) {
         currentIndex = index
         infoLabel.text = "\(index + 1)번째 사진"
         
-        imageLoadManager.load(photo.urls.thumb) { [weak self] data in
+        imageLoadManager.load(photoResponse.urls.thumb) { [weak self] data in
             DispatchQueue.main.async {
                 self?.imageView.image = UIImage(data: data)
             }
