@@ -20,6 +20,7 @@ extension PhotoEntity {
     @NSManaged public var memo: String?
     @NSManaged public var imageURL: String?
     @NSManaged public var fileURL: String?
+    @NSManaged public var date: Date?
 
 }
 
