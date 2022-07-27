@@ -7,10 +7,12 @@
 
 import UIKit
 
+protocol PhotoCollectionViewCellDelegate: AnyObject {
+    func cellStarButtonClicked(index: Int)
+}
+
 final class PhotoCollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: PhotoCollectionViewCell.self)
-    
-    private var imageLoadManager = ImageLoadManager()
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,7 +20,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var starButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.tintColor = .white
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.setImage(UIImage(systemName: "star.fill"), for: .selected)
@@ -42,6 +44,12 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         return stackView
     }()
+    
+    private var imageLoadManager = ImageLoadManager()
+    
+    weak var delegate: PhotoCollectionViewCellDelegate?
+    
+    private var currentIndex = -1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -84,8 +92,9 @@ extension PhotoCollectionViewCell {
     }
     
     @objc private func touchStarButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        sender.tintColor = sender.isSelected ? .systemYellow : .white
+//        sender.isSelected.toggle()
+//        sender.tintColor = sender.isSelected ? .systemYellow : .white
+        delegate?.cellStarButtonClicked(index: currentIndex)
     }
 }
 
@@ -93,6 +102,7 @@ extension PhotoCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     func configureCell(index: Int, photo: Photo) {
+        currentIndex = index
         infoLabel.text = "\(index + 1)번째 사진"
         
         imageLoadManager.load(photo.urls.thumb) { [weak self] data in

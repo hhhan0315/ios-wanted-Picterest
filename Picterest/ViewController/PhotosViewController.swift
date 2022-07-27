@@ -17,6 +17,7 @@ final class PhotosViewController: UIViewController {
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -84,6 +85,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         
         let photo = viewModel.photo(at: indexPath.row)
         cell.configureCell(index: indexPath.row, photo: photo)
+        cell.delegate = self
         
         return cell
     }
@@ -110,5 +112,19 @@ extension PhotosViewController: PinterestLayoutDelegate {
         let imageRatio = imageHeight / imageWidth
         
         return imageRatio * cellWidth
+    }
+}
+
+// MARK: - PhotoCollectionViewCellDelegate
+
+extension PhotosViewController: PhotoCollectionViewCellDelegate {
+    func cellStarButtonClicked(index: Int) {
+        let alertController = UIAlertController(title: "메모 입력", message: nil, preferredStyle: .alert)
+        alertController.addTextField()
+        alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+//            print(alertController.textFields?.first?.text)
+        }))
+        self.present(alertController, animated: true)
     }
 }
