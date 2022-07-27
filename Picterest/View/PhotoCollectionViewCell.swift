@@ -111,4 +111,12 @@ extension PhotoCollectionViewCell {
             }
         }
     }
+    
+    func configureCell(photoEntity: PhotoEntity) {
+        guard let urlString = photoEntity.fileURL else {
+            return
+        }
+
+        imageView.image = ImageFileManager.shared.getSavedImage(urlString: urlString)
+    }
 }

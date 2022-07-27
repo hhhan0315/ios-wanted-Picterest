@@ -24,6 +24,17 @@ class PinterestLayout: UICollectionViewLayout {
         return collectionView.bounds.width - (insets.left + insets.right)
     }
     
+    private var numberOfColumns: Int
+    
+    init(numberOfColumns: Int) {
+        self.numberOfColumns = numberOfColumns
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // 콜렉션 뷰 콘텐츠 사이즈
     override var collectionViewContentSize: CGSize {
         return CGSize(width: contentWidth, height: contentHeight)

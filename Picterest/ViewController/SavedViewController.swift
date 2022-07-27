@@ -9,11 +9,16 @@ import UIKit
 import Combine
 
 final class SavedViewController: UIViewController {
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.dataSource = self
-        tableView.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.identifier)
-        return tableView
+    private lazy var collectionView: UICollectionView = {
+//        let layout = PinterestLayout(numberOfColumns: 1)
+//        layout.delegate = self
+        
+        let layout = UICollectionViewFlowLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        return collectionView
     }()
     
     private let viewModel = SavedViewModel()
@@ -49,16 +54,16 @@ extension SavedViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
     }
     
     private func makeConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
     
@@ -66,21 +71,21 @@ extension SavedViewController {
         viewModel.$photoEntities
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
             }
             .store(in: &cancellable)
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UICollectionViewDataSource
 
-extension SavedViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SavedViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.photoEntitiesCount()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath) as? PhotoTableViewCell else {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
             return .init()
         }
         
@@ -90,3 +95,14 @@ extension SavedViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - PinterestLayoutDelegate
+
+//extension SavedViewController: PinterestLayoutDelegate {
+//    let cellWidth: CGFloat = (view.bounds.width - 4)
+//    let imageHeight: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).height)
+//    let imageWidth: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).width)
+//    let imageRatio = imageHeight / imageWidth
+//
+//    return imageRatio * cellWidth
+//}
