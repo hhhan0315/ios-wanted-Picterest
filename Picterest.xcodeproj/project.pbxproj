@@ -11,7 +11,7 @@
 		01190541288FAEDF0087B36B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190540288FAEDF0087B36B /* MainTabBarController.swift */; };
 		01190543288FB4E20087B36B /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190542288FB4E20087B36B /* PinterestLayout.swift */; };
 		0185CDB2288FD59F00E0666E /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185CDB1288FD59F00E0666E /* ImageLoadManager.swift */; };
-		0185CDB52890D50900E0666E /* PhotoCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0185CDB32890D50900E0666E /* PhotoCoreData.xcdatamodeld */; };
+		0185CDB52890D50900E0666E /* Picterest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0185CDB32890D50900E0666E /* Picterest.xcdatamodeld */; };
 		0185CDBC2890D6A000E0666E /* PhotoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185CDBA2890D6A000E0666E /* PhotoEntity+CoreDataClass.swift */; };
 		0185CDBD2890D6A000E0666E /* PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0185CDBB2890D6A000E0666E /* PhotoEntity+CoreDataProperties.swift */; };
 		019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B1BD8288E428D00A47E5C /* PhotosViewController.swift */; };
@@ -129,6 +129,8 @@
 			children = (
 				01E22DA0288E89BA00F46475 /* Constants.swift */,
 				01E22DA6288E8F8000F46475 /* PhotoResponse.swift */,
+				0185CDBA2890D6A000E0666E /* PhotoEntity+CoreDataClass.swift */,
+				0185CDBB2890D6A000E0666E /* PhotoEntity+CoreDataProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,8 +146,6 @@
 		DE15E64F28604278003DD2F5 = {
 			isa = PBXGroup;
 			children = (
-				0185CDBA2890D6A000E0666E /* PhotoEntity+CoreDataClass.swift */,
-				0185CDBB2890D6A000E0666E /* PhotoEntity+CoreDataProperties.swift */,
 				DE15E65A28604278003DD2F5 /* Picterest */,
 				DE15E65928604278003DD2F5 /* Products */,
 			);
@@ -171,7 +171,7 @@
 				01E22D99288E834B00F46475 /* Network */,
 				01190546288FC7080087B36B /* Utils */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
-				0185CDB32890D50900E0666E /* PhotoCoreData.xcdatamodeld */,
+				0185CDB32890D50900E0666E /* Picterest.xcdatamodeld */,
 			);
 			path = Picterest;
 			sourceTree = "<group>";
@@ -253,7 +253,7 @@
 				0185CDBC2890D6A000E0666E /* PhotoEntity+CoreDataClass.swift in Sources */,
 				019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */,
 				DE15E65E28604278003DD2F5 /* SceneDelegate.swift in Sources */,
-				0185CDB52890D50900E0666E /* PhotoCoreData.xcdatamodeld in Sources */,
+				0185CDB52890D50900E0666E /* Picterest.xcdatamodeld in Sources */,
 				01E22D9F288E836000F46475 /* NetworkManager.swift in Sources */,
 				01E22DA4288E8E2100F46475 /* PhotosViewModel.swift in Sources */,
 				01190522288ED0900087B36B /* ImageCacheManager.swift in Sources */,
@@ -478,13 +478,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0185CDB32890D50900E0666E /* PhotoCoreData.xcdatamodeld */ = {
+		0185CDB32890D50900E0666E /* Picterest.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				0185CDB42890D50900E0666E /* PhotoCoreData.xcdatamodel */,
 			);
 			currentVersion = 0185CDB42890D50900E0666E /* PhotoCoreData.xcdatamodel */;
-			path = PhotoCoreData.xcdatamodeld;
+			path = Picterest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

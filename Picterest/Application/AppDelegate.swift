@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Core Data
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "PhotoCoreData")
+        let container = NSPersistentContainer(name: "Picterest")
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
