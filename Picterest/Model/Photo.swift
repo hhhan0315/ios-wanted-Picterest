@@ -8,9 +8,9 @@
 import Foundation
 
 struct Photo {
-    var id: String
-    var memo: String
-    var imageURL: String
-    var fileURL: String
-    var date: Date
+    let id: String
+    let memo: String
+    let imageURL: String
+    let fileURL: URL
+    let date: Date
 }

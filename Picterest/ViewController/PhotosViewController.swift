@@ -80,11 +80,11 @@ extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
-            return UICollectionViewCell()
+            return .init()
         }
         
-        let photoResponse = viewModel.photoResponse(at: indexPath.row)
-        cell.configureCell(index: indexPath.row, photoResponse: photoResponse)
+        let photoResponse = viewModel.photoResponse(at: indexPath.item)
+        cell.configureCell(index: indexPath.item, photoResponse: photoResponse)
         cell.delegate = self
         
         return cell
@@ -123,7 +123,7 @@ extension PhotosViewController: PhotoCollectionViewCellDelegate {
         alertController.addTextField()
         alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
         alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-//            print(alertController.textFields?.first?.text)
+            self.viewModel.savePhotoResponse(index: index, memo: alertController.textFields?.first?.text ?? "")
         }))
         self.present(alertController, animated: true)
     }

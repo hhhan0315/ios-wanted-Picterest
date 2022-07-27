@@ -39,4 +39,26 @@ final class PhotosViewModel {
             }
         }
     }
+    
+    func savePhotoResponse(index: Int, memo: String) {
+        let photoResponse = photoResponse(at: index)
+        
+        ImageLoadManager().load(photoResponse.urls.thumb) { data in
+            
+            ImageFileManager.shared.saveImage(id: photoResponse.id, data: data) { success in
+                if success {
+                    let fileURL = ImageFileManager.shared.getSavedImageURL(id: photoResponse.id)
+                    
+                    let photo = Photo(id: photoResponse.id,
+                                      memo: memo,
+                                      imageURL: photoResponse.urls.thumb,
+                                      fileURL: fileURL!,
+                                      date: Date())
+                    
+                    CoreDataManager.shared.savePhotoEntity(photo: photo) {
+                    }
+                }
+            }
+        }
+    }
 }

@@ -5,10 +5,10 @@
 //  Created by rae on 2022/07/27.
 //
 
-import UIKit
+import Foundation
 import CoreData
 
-class CoreDataManager {
+final class CoreDataManager {
     enum CoreDataConstants {
         static let containerName = "Picterest"
         static let entityName = "PhotoEntity"
@@ -96,6 +96,18 @@ class CoreDataManager {
                     completion()
                 }
             }
+        } catch {
+            print(error.localizedDescription)
+            completion()
+        }
+    }
+    
+    func deleteAllPhotoEntity(completion: @escaping () -> Void) {
+        let request: NSFetchRequest<NSFetchRequestResult> = PhotoEntity.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try self.context.execute(deleteRequest)
+            completion()
         } catch {
             print(error.localizedDescription)
             completion()
