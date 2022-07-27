@@ -38,7 +38,7 @@ final class PhotosViewController: UIViewController {
 extension PhotosViewController {
     private func configure() {
         configureView()
-        addSubViews()
+        addSubviews()
         makeConstraints()
         bind()
     }
@@ -47,7 +47,7 @@ extension PhotosViewController {
         view.backgroundColor = .white
     }
     
-    private func addSubViews() {
+    private func addSubviews() {
         view.addSubview(collectionView)
     }
     
@@ -56,8 +56,8 @@ extension PhotosViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
     

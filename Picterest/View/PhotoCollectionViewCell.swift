@@ -66,11 +66,11 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
 
 extension PhotoCollectionViewCell {
     private func configure() {
-        addSubViews()
+        addSubviews()
         makeConstraints()
     }
     
-    private func addSubViews() {
+    private func addSubviews() {
         addSubview(imageView)
         addSubview(topStackView)
     }
