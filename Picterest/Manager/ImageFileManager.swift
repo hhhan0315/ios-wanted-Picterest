@@ -48,8 +48,8 @@ final class ImageFileManager {
         }
     }
     
-    func fetchImageURL(id: String) -> String {
+    func fetchImage(id: String) -> UIImage? {
         let fileURL = directoryURL.appendingPathComponent(id).appendingPathExtension("png")
-        return fileURL.path
+        return UIImage(contentsOfFile: fileURL.path)
     }
 }

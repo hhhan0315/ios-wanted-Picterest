@@ -117,8 +117,6 @@ extension PhotoCollectionViewCell {
         starButton.tintColor = .systemYellow
         
         infoLabel.text = photoEntity.memo
-        
-        let url = ImageFileManager.shared.fetchImageURL(id: photoEntity.id!)
-        imageView.image = UIImage(contentsOfFile: url)
+        imageView.image = ImageFileManager.shared.fetchImage(id: photoEntity.id ?? "")
     }
 }
