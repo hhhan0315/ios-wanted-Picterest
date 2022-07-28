@@ -10,10 +10,8 @@ import Combine
 
 final class SavedViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
-//        let layout = PinterestLayout(numberOfColumns: 1)
-//        layout.delegate = self
-        
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 200)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
@@ -28,8 +26,6 @@ final class SavedViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        
-//        viewModel.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,14 +91,3 @@ extension SavedViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-// MARK: - PinterestLayoutDelegate
-
-//extension SavedViewController: PinterestLayoutDelegate {
-//    let cellWidth: CGFloat = (view.bounds.width - 4)
-//    let imageHeight: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).height)
-//    let imageWidth: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).width)
-//    let imageRatio = imageHeight / imageWidth
-//
-//    return imageRatio * cellWidth
-//}

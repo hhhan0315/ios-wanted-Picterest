@@ -20,7 +20,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var starButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
         button.tintColor = .white
         button.setImage(UIImage(systemName: "star"), for: .normal)
         button.setImage(UIImage(systemName: "star.fill"), for: .selected)
@@ -113,10 +113,12 @@ extension PhotoCollectionViewCell {
     }
     
     func configureCell(photoEntity: PhotoEntity) {
-        guard let urlString = photoEntity.fileURL else {
-            return
-        }
-
-        imageView.image = ImageFileManager.shared.getSavedImage(urlString: urlString)
+        starButton.isSelected = true
+        starButton.tintColor = .systemYellow
+        
+        infoLabel.text = photoEntity.memo
+        
+        let url = ImageFileManager.shared.fetchImageURL(id: photoEntity.id!)
+        imageView.image = UIImage(contentsOfFile: url)
     }
 }
