@@ -36,8 +36,8 @@ final class CoreDataManager {
     func fetchPhotoEntity() -> [PhotoEntity] {
         let request = PhotoEntity.fetchRequest()
         // 정렬을 date 기준으로 내림차순
-        //        let dateOrder = NSSortDescriptor(key: "date", ascending: false)
-        //        request.sortDescriptors = [dateOrder]
+        let dateOrder = NSSortDescriptor(key: "date", ascending: false)
+        request.sortDescriptors = [dateOrder]
         
         do {
             let fetchResult = try context.fetch(request)
