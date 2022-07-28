@@ -65,7 +65,8 @@ extension PhotosViewController {
         viewModel.$photoResponses
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
+                self.collectionView.reloadSections(IndexSet(0...0))
             }
             .store(in: &cancellable)
     }
@@ -95,10 +96,9 @@ extension PhotosViewController: UICollectionViewDataSource {
 
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard indexPath.item >= viewModel.photoResponsesCount() - 1 else {
-            return
+        if indexPath.item == viewModel.photoResponsesCount() - 1 {
+            viewModel.fetch()
         }
-        viewModel.fetch()
     }
 }
 

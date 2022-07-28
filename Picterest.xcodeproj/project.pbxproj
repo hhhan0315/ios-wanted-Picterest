@@ -86,12 +86,12 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		01190546288FC7080087B36B /* Utils */ = {
+		01190546288FC7080087B36B /* Layout */ = {
 			isa = PBXGroup;
 			children = (
 				01190542288FB4E20087B36B /* PinterestLayout.swift */,
 			);
-			path = Utils;
+			path = Layout;
 			sourceTree = "<group>";
 		};
 		019B1BD4288E3D7600A47E5C /* Application */ = {
@@ -181,7 +181,7 @@
 				01E22DA5288E8E2600F46475 /* ViewModel */,
 				01190523288ED0930087B36B /* Manager */,
 				01E22D99288E834B00F46475 /* Network */,
-				01190546288FC7080087B36B /* Utils */,
+				01190546288FC7080087B36B /* Layout */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 				0185CDB32890D50900E0666E /* Picterest.xcdatamodeld */,
 			);

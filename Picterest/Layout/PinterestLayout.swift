@@ -40,7 +40,7 @@ class PinterestLayout: UICollectionViewLayout {
         }
 
         let numberOfColumns: Int = 2
-        let cellPadding: CGFloat = 2
+        let cellPadding: CGFloat = 4
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         
         // cell의 x 위치 배열
@@ -75,7 +75,7 @@ class PinterestLayout: UICollectionViewLayout {
         }
     }
     
-    // 모든 셀과 보충 뷰의 레이아웃 정보 리턴 (rect에 요청이 들어올 경우)
+    // 사각형 내의 모든 셀과 보충 뷰의 레이아웃 속성 반환
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var visibleLayoutAttributes: [UICollectionViewLayoutAttributes] = []
         
