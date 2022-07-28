@@ -56,7 +56,6 @@ final class CoreDataManager {
             let managedObject = NSManagedObject(entity: entity, insertInto: context)
             managedObject.setValue(photo.id, forKey: "id")
             managedObject.setValue(photo.memo, forKey: "memo")
-            managedObject.setValue(photo.fileURL, forKey: "fileURL")
             managedObject.setValue(photo.imageURL, forKey: "imageURL")
             managedObject.setValue(photo.date, forKey: "date")
             
