@@ -92,8 +92,8 @@ extension PhotoCollectionViewCell {
     }
     
     @objc private func touchStarButton(_ sender: UIButton) {
-//        sender.isSelected.toggle()
-//        sender.tintColor = sender.isSelected ? .systemYellow : .white
+        sender.isSelected.toggle()
+        sender.tintColor = sender.isSelected ? .systemYellow : .white
         delegate?.cellStarButtonClicked(index: currentIndex)
     }
 }
