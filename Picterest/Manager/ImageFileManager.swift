@@ -48,8 +48,19 @@ final class ImageFileManager {
         }
     }
     
+    private func fetchImageURLString(id: String) -> String {
+        return directoryURL.appendingPathComponent(id).appendingPathExtension("png").path
+    }
+    
     func fetchImage(id: String) -> UIImage? {
-        let fileURL = directoryURL.appendingPathComponent(id).appendingPathExtension("png")
-        return UIImage(contentsOfFile: fileURL.path)
+        return UIImage(contentsOfFile: fetchImageURLString(id: id))
+    }
+    
+    func deleteImage(id: String) {
+        do {
+            try fileManager.removeItem(atPath: fetchImageURLString(id: id))
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }

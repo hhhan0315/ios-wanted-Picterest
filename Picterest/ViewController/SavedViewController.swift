@@ -13,9 +13,12 @@ final class SavedViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
+        let longPressGesutre = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        collectionView.addGestureRecognizer(longPressGesutre)
         return collectionView
     }()
     
@@ -70,6 +73,19 @@ extension SavedViewController {
                 self.collectionView.reloadData()
             }
             .store(in: &cancellable)
+    }
+    
+    @objc private func longPressGestureRecognized(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            if let row = collectionView.indexPathForItem(at: sender.location(in: collectionView))?.row {
+                let alertController = UIAlertController(title: "사진 삭제", message: nil, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
+                alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                    self.viewModel.deletePhotoEntity(index: row)
+                }))
+                present(alertController, animated: true)
+            }
+        }
     }
 }
 

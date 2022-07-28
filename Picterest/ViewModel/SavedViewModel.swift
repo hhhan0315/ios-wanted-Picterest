@@ -25,4 +25,12 @@ final class SavedViewModel {
     func fetch() {
         photoEntities = CoreDataManager.shared.fetchPhotoEntity()
     }
+    
+    func deletePhotoEntity(index: Int) {
+        let photoEntity = photoEntities[index]
+        ImageFileManager.shared.deleteImage(id: photoEntity.id ?? "")
+        CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) {
+            self.photoEntities.remove(at: index)
+        }
+    }
 }
