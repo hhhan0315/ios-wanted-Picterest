@@ -10,8 +10,7 @@ import Combine
 
 final class SavedViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        let layout = UICollectionViewCompositionalLayout(section: createLayoutSection())
         
         let longPressGesutre = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
         
@@ -86,6 +85,18 @@ extension SavedViewController {
                 present(alertController, animated: true)
             }
         }
+    }
+    
+    private func createLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(488))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(488))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        return section
     }
 }
 
