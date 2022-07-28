@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 final class SavedViewController: UIViewController {
+    // MARK: - Properties
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout(section: createLayoutSection())
         
@@ -24,6 +26,8 @@ final class SavedViewController: UIViewController {
     private let viewModel = SavedViewModel()
     private var cancellable = Set<AnyCancellable>()
     
+    // MARK: - Override Method
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +41,7 @@ final class SavedViewController: UIViewController {
     }
 }
 
-// MARK: - Private
+// MARK: - UI Method
 
 extension SavedViewController {
     private func configure() {
@@ -65,6 +69,22 @@ extension SavedViewController {
         ])
     }
     
+    private func createLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(488))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(488))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        return section
+    }
+}
+
+// MARK: - bind Method
+
+extension SavedViewController {
     private func bind() {
         viewModel.$photoEntities
             .receive(on: DispatchQueue.main)
@@ -73,7 +93,11 @@ extension SavedViewController {
             }
             .store(in: &cancellable)
     }
-    
+}
+
+// MARK: - objc Method
+
+extension SavedViewController {
     @objc private func longPressGestureRecognized(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             if let row = collectionView.indexPathForItem(at: sender.location(in: collectionView))?.row {
@@ -85,18 +109,6 @@ extension SavedViewController {
                 present(alertController, animated: true)
             }
         }
-    }
-    
-    private func createLayoutSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .estimated(488))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(488))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
-        return section
     }
 }
 

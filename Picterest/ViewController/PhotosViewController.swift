@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 final class PhotosViewController: UIViewController {
+    // MARK: - Properties
+    
     private lazy var collectionView: UICollectionView = {
         let layout = PinterestLayout()
         layout.delegate = self
@@ -24,6 +26,8 @@ final class PhotosViewController: UIViewController {
     private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
     
+    // MARK: - Override Method
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +37,7 @@ final class PhotosViewController: UIViewController {
     }
 }
 
-// MARK: - Private
+// MARK: - UI Method
 
 extension PhotosViewController {
     private func configure() {
@@ -60,7 +64,11 @@ extension PhotosViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
-    
+}
+
+// MARK: - bind Method
+
+extension PhotosViewController {
     private func bind() {
         viewModel.$photoResponses
             .receive(on: DispatchQueue.main)

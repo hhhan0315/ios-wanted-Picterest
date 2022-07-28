@@ -8,6 +8,8 @@
 import Foundation
 
 final class PhotosViewModel {
+    // MARK: - Properties
+    
     @Published var photoResponses: [PhotoResponse]
     private var page: Int
     private let networkManager: NetworkManager
@@ -17,6 +19,8 @@ final class PhotosViewModel {
         self.page = 1
         self.networkManager = NetworkManager()
     }
+    
+    // MARK: - Method
     
     func photoResponsesCount() -> Int {
         return photoResponses.count

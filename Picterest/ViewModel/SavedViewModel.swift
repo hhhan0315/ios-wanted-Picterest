@@ -8,11 +8,15 @@
 import Foundation
 
 final class SavedViewModel {
+    // MARK: - Properties
+    
     @Published var photoEntities: [PhotoEntity]
     
     init() {
         self.photoEntities = []
     }
+    
+    // MARK: - Method
     
     func photoEntitiesCount() -> Int {
         return photoEntities.count

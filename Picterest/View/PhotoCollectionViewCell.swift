@@ -12,6 +12,8 @@ protocol PhotoCollectionViewCellDelegate: AnyObject {
 }
 
 final class PhotoCollectionViewCell: UICollectionViewCell {
+    // MARK: - Properties
+    
     static let identifier = String(describing: PhotoCollectionViewCell.self)
     
     private let imageView: UIImageView = {
@@ -51,6 +53,14 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     private var currentIndex = -1
     
+    // MARK: - Override Method
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -62,7 +72,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Private
+// MARK: - UI Method
 
 extension PhotoCollectionViewCell {
     private func configure() {
@@ -90,7 +100,11 @@ extension PhotoCollectionViewCell {
             topStackView.heightAnchor.constraint(equalToConstant: 30.0),
         ])
     }
-    
+}
+
+// MARK: - objc Method
+
+extension PhotoCollectionViewCell {
     @objc private func touchStarButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         sender.tintColor = sender.isSelected ? .systemYellow : .white
@@ -98,7 +112,7 @@ extension PhotoCollectionViewCell {
     }
 }
 
-// MARK: - Public
+// MARK: - Public Method
 
 extension PhotoCollectionViewCell {
     func configureCell(index: Int, photoResponse: PhotoResponse) {

@@ -8,6 +8,8 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
+    // MARK: - Properties
+    
     enum MainTabBarItem {
         case photo
         case saved
@@ -31,6 +33,8 @@ final class MainTabBarController: UITabBarController {
         }
     }
     
+    // MARK: - Override Method
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +42,7 @@ final class MainTabBarController: UITabBarController {
     }
 }
 
-// MARK: - Private
+// MARK: - UI Method
 
 extension MainTabBarController {
     private func configureUI() {
