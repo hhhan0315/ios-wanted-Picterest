@@ -63,9 +63,9 @@ extension SavedViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 4.0),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 2.0),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -4.0),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -2.0),
         ])
     }
     
@@ -118,7 +118,7 @@ extension SavedViewController {
             let alertController = UIAlertController(title: "사진 삭제", message: nil, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
             alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                self.viewModel.deletePhotoEntity(index: indexPath.row)
+                self.viewModel.deletePhotoEntity(index: indexPath.item)
             }))
             present(alertController, animated: true)
         }

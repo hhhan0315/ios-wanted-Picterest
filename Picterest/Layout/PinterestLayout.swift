@@ -40,7 +40,7 @@ class PinterestLayout: UICollectionViewLayout {
         }
 
         let numberOfColumns: Int = 2
-        let cellPadding: CGFloat = 4
+        let cellPadding: CGFloat = 2
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         
         // cell의 x 위치 배열

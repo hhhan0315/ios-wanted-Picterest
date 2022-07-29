@@ -19,7 +19,6 @@ final class PhotosViewController: UIViewController {
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-//        collectionView.backgroundColor = .white
         return collectionView
     }()
     
