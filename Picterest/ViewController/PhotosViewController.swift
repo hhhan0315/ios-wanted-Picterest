@@ -126,7 +126,7 @@ extension PhotosViewController: PinterestLayoutDelegate {
 
 extension PhotosViewController: PhotoCollectionViewCellDelegate {
     func cellStarButtonClicked(index: Int) {
-        let alertController = UIAlertController(title: "메모 입력", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "메모 입력", message: "\(index + 1)번째 사진을 추가하시겠습니까?", preferredStyle: .alert)
         alertController.addTextField()
         alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
         alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
