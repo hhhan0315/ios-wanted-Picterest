@@ -22,11 +22,7 @@ final class PhotosViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var viewModel: PhotosViewModel = {
-        let viewModel = PhotosViewModel()
-        viewModel.delegate = self
-        return viewModel
-    }()
+    private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
     
     // MARK: - Override Method
@@ -77,6 +73,22 @@ extension PhotosViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.collectionView.reloadSections(IndexSet(0...0))
+            }
+            .store(in: &cancellable)
+        
+        viewModel.$photoSaveSuccessTuple
+            .receive(on: DispatchQueue.main)
+            .sink { photoSaveSuccess in
+                guard let success = photoSaveSuccess.success, let index = photoSaveSuccess.index else {
+                    return
+                }
+                if success {
+                    self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                } else {
+                    let alertController = UIAlertController(title: "사진 저장 실패", message: "동일한 사진이 존재합니다.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "확인", style: .default))
+                    self.present(alertController, animated: true)
+                }
             }
             .store(in: &cancellable)
     }
@@ -136,21 +148,5 @@ extension PhotosViewController: PhotoCollectionViewCellDelegate {
             self.viewModel.savePhotoResponse(index: index, memo: alertController.textFields?.first?.text ?? "")
         }))
         self.present(alertController, animated: true)
-    }
-}
-
-// MARK: - PhotosViewModelDelegate
-
-extension PhotosViewController: PhotosViewModelDelegate {
-    func photoSaveSuccess(index: Int) {
-        DispatchQueue.main.async {
-            self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-        }
-    }
-    
-    func photoSaveFailure() {
-        let alertController = UIAlertController(title: "사진 저장 실패", message: "동일한 사진이 존재합니다.", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "확인", style: .default))
-        present(alertController, animated: true)
     }
 }

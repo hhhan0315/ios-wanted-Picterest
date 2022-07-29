@@ -7,22 +7,17 @@
 
 import Foundation
 
-protocol PhotosViewModelDelegate: AnyObject {
-    func photoSaveSuccess(index: Int)
-    func photoSaveFailure()
-}
-
 final class PhotosViewModel {
     // MARK: - Properties
     
     @Published var photoResponses: [PhotoResponse]
+    @Published var photoSaveSuccessTuple: (success: Bool?, index: Int?)
     private var page: Int
     private let networkManager: NetworkManager
-    
-    weak var delegate: PhotosViewModelDelegate?
-    
+        
     init() {
         self.photoResponses = []
+        self.photoSaveSuccessTuple = (nil, nil)
         self.page = 1
         self.networkManager = NetworkManager()
     }
@@ -61,10 +56,10 @@ final class PhotosViewModel {
                 ImageLoadManager.shared.load(imageURL) { data in
                     ImageFileManager.shared.saveImage(id: id, data: data)
                     CoreDataManager.shared.savePhotoEntity(photo: photo)
-                    self.delegate?.photoSaveSuccess(index: index)
+                    self.photoSaveSuccessTuple = (true, index)
                 }
             } else {
-                self.delegate?.photoSaveFailure()
+                self.photoSaveSuccessTuple = (false, nil)
             }
         }
     }
