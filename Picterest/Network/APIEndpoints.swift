@@ -12,6 +12,6 @@ struct APIEndpoints {
         return Endpoint(urlString: "https://api.unsplash.com/photos",
                         method: .get,
                         headers: ["Authorization": "Client-ID \(Constants.apiKey)"],
-                        queryItems: ["page": "\(page)", "per_page": "\(perPage)"])
+                        queryItems: ["page": "\(page)", "per_page": "\(perPage)", "order_by": "latest"])
     }
 }

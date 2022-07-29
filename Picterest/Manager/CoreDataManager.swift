@@ -73,13 +73,13 @@ final class CoreDataManager {
     
     // 일치하는 데이터 삭제하기 (Delete)
     func deletePhotoEntity(photoEntity: PhotoEntity, completion: @escaping () -> Void) {
-        guard let id = photoEntity.id else {
+        guard let date = photoEntity.date else {
             completion()
             return
         }
         
         let request = PhotoEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        request.predicate = NSPredicate(format: "date = %@", date as CVarArg)
         
         do {
             let fetchResult = try context.fetch(request)
