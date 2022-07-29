@@ -38,7 +38,7 @@ final class SavedViewModel {
         
         ImageFileManager.shared.existImageInFile(id: id) { exist in
             if exist {
-                ImageFileManager.shared.deleteImage(id: photoEntity.id ?? "")
+                ImageFileManager.shared.deleteImage(id: id)
                 CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) { success in
                     if success {
                         self.photoEntities.remove(at: index)
