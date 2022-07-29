@@ -27,15 +27,12 @@ final class CoreDataManager {
         return container
     }()
     
-    // 임시 저장소
     private var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
-    // 임시 저장소에서 데이터 가져오기 (Read)
     func fetchPhotoEntity() -> [PhotoEntity] {
         let request = PhotoEntity.fetchRequest()
-        // 정렬을 date 기준으로 내림차순
         let dateOrder = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [dateOrder]
         
@@ -48,7 +45,6 @@ final class CoreDataManager {
         }
     }
     
-    // 데이터 생성하기 (Create)
     func savePhotoEntity(photo: Photo) {
         let entity = NSEntityDescription.entity(forEntityName: CoreDataConstants.entityName, in: context)
         
@@ -67,7 +63,6 @@ final class CoreDataManager {
         }
     }
     
-    // 일치하는 데이터 삭제하기 (Delete)
     func deletePhotoEntity(photoEntity: PhotoEntity, completion: @escaping (Bool) -> Void) {
         guard let id = photoEntity.id else {
             completion(false)

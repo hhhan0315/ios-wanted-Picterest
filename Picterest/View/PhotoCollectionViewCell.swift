@@ -50,7 +50,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: PhotoCollectionViewCellDelegate?
     
-    private var currentIndex = -1
+    private var currentIndex: Int?
     
     // MARK: - Override Method
     
@@ -108,6 +108,9 @@ extension PhotoCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     @objc private func touchStarButton(_ sender: UIButton) {
+        guard let currentIndex = currentIndex else {
+            return
+        }
         delegate?.cellStarButtonClicked(index: currentIndex)
     }
 }
