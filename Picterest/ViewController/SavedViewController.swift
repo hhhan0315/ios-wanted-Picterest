@@ -43,6 +43,7 @@ final class SavedViewController: UIViewController {
 extension SavedViewController {
     private func configure() {
         configureView()
+        configureNavigation()
         addSubviews()
         makeConstraints()
         bind()
@@ -51,6 +52,11 @@ extension SavedViewController {
     
     private func configureView() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func configureNavigation() {
+        navigationItem.title = "Saved Images"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func addSubviews() {

@@ -52,10 +52,12 @@ extension MainTabBarController {
         
         let photosViewController = PhotosViewController()
         photosViewController.tabBarItem = photosTabBarItem
+        let photosNavigationController = UINavigationController(rootViewController: photosViewController)
         
         let savedViewController = SavedViewController()
         savedViewController.tabBarItem = savedTabBarItem
+        let savedNavigationController = UINavigationController(rootViewController: savedViewController)
         
-        viewControllers = [photosViewController, savedViewController]
+        viewControllers = [photosNavigationController, savedNavigationController]
     }
 }

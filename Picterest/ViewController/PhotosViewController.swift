@@ -42,6 +42,7 @@ final class PhotosViewController: UIViewController {
 extension PhotosViewController {
     private func configure() {
         configureView()
+        configureNavigation()
         addSubviews()
         makeConstraints()
         bind()
@@ -50,6 +51,11 @@ extension PhotosViewController {
     
     private func configureView() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func configureNavigation() {
+        navigationItem.title = "Unsplash"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func addSubviews() {
