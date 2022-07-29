@@ -93,6 +93,14 @@ extension SavedViewController {
     }
 }
 
+// MARK: - Method
+
+extension SavedViewController {
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(photoSaveSuccess), name: Notification.Name.photoSaveSuccess, object: nil)
+    }
+}
+
 // MARK: - objc Method
 
 extension SavedViewController {
@@ -127,14 +135,6 @@ extension SavedViewController {
         DispatchQueue.main.async {
             self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         }
-    }
-}
-
-// MARK: - Method
-
-extension SavedViewController {
-    private func configureNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(photoSaveSuccess), name: Notification.Name.photoSaveSuccess, object: nil)
     }
 }
 

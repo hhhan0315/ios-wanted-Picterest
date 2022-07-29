@@ -45,6 +45,7 @@ extension PhotosViewController {
         addSubviews()
         makeConstraints()
         bind()
+        configureNotificationCenter()
     }
     
     private func configureView() {
@@ -92,6 +93,24 @@ extension PhotosViewController {
                 }
             }
             .store(in: &cancellable)
+    }
+}
+
+// MARK: - Method
+
+extension PhotosViewController {
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(photoDeleteSuccess), name: Notification.Name.photoDeleteSuccess, object: nil)
+    }
+}
+
+// MARK: - objc Method
+
+extension PhotosViewController {
+    @objc private func photoDeleteSuccess() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadSections(IndexSet(0...0))
+        }
     }
 }
 

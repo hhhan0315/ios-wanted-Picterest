@@ -43,6 +43,7 @@ final class SavedViewModel {
                 CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) { success in
                     if success {
                         self.photoEntities.remove(at: index)
+                        NotificationCenter.default.post(name: NSNotification.Name.photoDeleteSuccess, object: nil)
                     }
                 }
             }
