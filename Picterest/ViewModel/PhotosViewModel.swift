@@ -8,7 +8,8 @@
 import Foundation
 
 protocol PhotosViewModelDelegate: AnyObject {
-    func photoCantSave()
+    func photoSaveSuccess(index: Int)
+    func photoSaveFailure()
 }
 
 final class PhotosViewModel {
@@ -60,9 +61,10 @@ final class PhotosViewModel {
                 ImageLoadManager.shared.load(imageURL) { data in
                     ImageFileManager.shared.saveImage(id: id, data: data)
                     CoreDataManager.shared.savePhotoEntity(photo: photo)
+                    self.delegate?.photoSaveSuccess(index: index)
                 }
             } else {
-                self.delegate?.photoCantSave()
+                self.delegate?.photoSaveFailure()
             }
         }
     }

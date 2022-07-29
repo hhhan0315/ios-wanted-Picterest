@@ -97,4 +97,21 @@ final class CoreDataManager {
         }
     }
     
+    func isExistPhotoEntity(id: String, completion: @escaping (Bool) -> Void) {
+        let request = PhotoEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        
+        do {
+            let fetchResult = try context.fetch(request)
+            
+            if !fetchResult.isEmpty {
+                completion(true)
+            }
+        } catch {
+            print(error.localizedDescription)
+            completion(false)
+        }
+        
+        completion(false)
+    }
 }

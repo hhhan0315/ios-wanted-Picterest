@@ -57,6 +57,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         imageView.image = nil
+        starButtonSelected(false)
     }
     
     override init(frame: CGRect) {
@@ -104,9 +105,16 @@ extension PhotoCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     @objc private func touchStarButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        sender.tintColor = sender.isSelected ? .systemYellow : .white
         delegate?.cellStarButtonClicked(index: currentIndex)
+    }
+}
+
+// MARK: - Method
+
+extension PhotoCollectionViewCell {
+    private func starButtonSelected(_ isSelected: Bool) {
+        starButton.isSelected = isSelected
+        starButton.tintColor = isSelected ? .systemYellow : .white
     }
 }
 
@@ -122,11 +130,16 @@ extension PhotoCollectionViewCell {
                 self?.imageView.image = UIImage(data: data)
             }
         }
+        
+        CoreDataManager.shared.isExistPhotoEntity(id: photoResponse.id) { isExist in
+            if isExist {
+                self.starButtonSelected(true)
+            }
+        }
     }
     
     func configureCell(photoEntity: PhotoEntity) {
-        starButton.isSelected = true
-        starButton.tintColor = .systemYellow
+        starButtonSelected(true)
         
         infoLabel.text = photoEntity.memo
         imageView.image = ImageFileManager.shared.fetchImage(id: photoEntity.id ?? "")

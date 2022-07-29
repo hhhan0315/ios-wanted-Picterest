@@ -142,7 +142,13 @@ extension PhotosViewController: PhotoCollectionViewCellDelegate {
 // MARK: - PhotosViewModelDelegate
 
 extension PhotosViewController: PhotosViewModelDelegate {
-    func photoCantSave() {
+    func photoSaveSuccess(index: Int) {
+        DispatchQueue.main.async {
+            self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        }
+    }
+    
+    func photoSaveFailure() {
         let alertController = UIAlertController(title: "사진 저장 실패", message: "동일한 사진이 존재합니다.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "확인", style: .default))
         present(alertController, animated: true)
