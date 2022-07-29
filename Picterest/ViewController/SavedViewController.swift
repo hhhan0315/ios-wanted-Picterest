@@ -89,7 +89,7 @@ extension SavedViewController {
         viewModel.$photoEntities
             .receive(on: DispatchQueue.main)
             .sink { _ in
-                self.collectionView.reloadData()
+                self.collectionView.reloadSections(IndexSet(0...0))
             }
             .store(in: &cancellable)
     }
@@ -99,15 +99,28 @@ extension SavedViewController {
 
 extension SavedViewController {
     @objc private func longPressGestureRecognized(_ sender: UILongPressGestureRecognizer) {
+        let pressPoint = sender.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: pressPoint) else {
+            return
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
         if sender.state == .began {
-            if let row = collectionView.indexPathForItem(at: sender.location(in: collectionView))?.row {
-                let alertController = UIAlertController(title: "사진 삭제", message: nil, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
-                alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                    self.viewModel.deletePhotoEntity(index: row)
-                }))
-                present(alertController, animated: true)
+            UIView.animate(withDuration: 0.1) {
+                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }
+        } else if sender.state == .ended {
+            UIView.animate(withDuration: 0.1) {
+                cell.transform = .identity
+            }
+            let alertController = UIAlertController(title: "사진 삭제", message: nil, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
+            alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
+                self.viewModel.deletePhotoEntity(index: indexPath.row)
+            }))
+            present(alertController, animated: true)
         }
     }
 }

@@ -73,7 +73,6 @@ extension PhotosViewController {
         viewModel.$photoResponses
             .receive(on: DispatchQueue.main)
             .sink { _ in
-//                self.collectionView.reloadData()
                 self.collectionView.reloadSections(IndexSet(0...0))
             }
             .store(in: &cancellable)
