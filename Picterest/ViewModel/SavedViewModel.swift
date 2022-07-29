@@ -32,9 +32,26 @@ final class SavedViewModel {
     
     func deletePhotoEntity(index: Int) {
         let photoEntity = photoEntities[index]
-        ImageFileManager.shared.deleteImage(id: photoEntity.id ?? "")
-        CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) {
-            self.photoEntities.remove(at: index)
+        guard let id = photoEntity.id else {
+            return
         }
+        
+        ImageFileManager.shared.existImageInFile(id: id) { exist in
+            if exist {
+                ImageFileManager.shared.deleteImage(id: photoEntity.id ?? "")
+                CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) { success in
+                    if success {
+                        self.photoEntities.remove(at: index)
+                    }
+                }
+            }
+        }
+        
+//        ImageFileManager.shared.deleteImage(id: photoEntity.id ?? "")
+//        CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) { success in
+//            if success {
+//                self.photoEntities.remove(at: index)
+//            }
+//        }
     }
 }

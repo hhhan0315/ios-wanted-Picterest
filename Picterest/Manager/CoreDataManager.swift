@@ -49,7 +49,7 @@ final class CoreDataManager {
     }
     
     // 데이터 생성하기 (Create)
-    func savePhotoEntity(photo: Photo, completion: @escaping () -> Void) {
+    func savePhotoEntity(photo: Photo) {
         let entity = NSEntityDescription.entity(forEntityName: CoreDataConstants.entityName, in: context)
         
         if let entity = entity {
@@ -61,25 +61,21 @@ final class CoreDataManager {
             
             do {
                 try context.save()
-                completion()
             } catch {
                 print(error.localizedDescription)
-                completion()
             }
         }
-        
-        completion()
     }
     
     // 일치하는 데이터 삭제하기 (Delete)
-    func deletePhotoEntity(photoEntity: PhotoEntity, completion: @escaping () -> Void) {
-        guard let date = photoEntity.date else {
-            completion()
+    func deletePhotoEntity(photoEntity: PhotoEntity, completion: @escaping (Bool) -> Void) {
+        guard let id = photoEntity.id else {
+            completion(false)
             return
         }
         
         let request = PhotoEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "date = %@", date as CVarArg)
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
         
         do {
             let fetchResult = try context.fetch(request)
@@ -89,15 +85,15 @@ final class CoreDataManager {
                 
                 do {
                     try context.save()
-                    completion()
+                    completion(true)
                 } catch {
                     print(error.localizedDescription)
-                    completion()
+                    completion(false)
                 }
             }
         } catch {
             print(error.localizedDescription)
-            completion()
+            completion(false)
         }
     }
     

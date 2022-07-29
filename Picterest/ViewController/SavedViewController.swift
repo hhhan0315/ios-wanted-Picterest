@@ -109,7 +109,7 @@ extension SavedViewController {
         
         if sender.state == .began {
             UIView.animate(withDuration: 0.1) {
-                cell.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
             }
         } else if sender.state == .ended {
             UIView.animate(withDuration: 0.1) {

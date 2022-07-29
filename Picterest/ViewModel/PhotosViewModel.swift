@@ -7,12 +7,18 @@
 
 import Foundation
 
+protocol PhotosViewModelDelegate: AnyObject {
+    func photoCantSave()
+}
+
 final class PhotosViewModel {
     // MARK: - Properties
     
     @Published var photoResponses: [PhotoResponse]
     private var page: Int
     private let networkManager: NetworkManager
+    
+    weak var delegate: PhotosViewModelDelegate?
     
     init() {
         self.photoResponses = []
@@ -45,19 +51,18 @@ final class PhotosViewModel {
     
     func savePhotoResponse(index: Int, memo: String) {
         let photoResponse = photoResponse(at: index)
+        let imageURL = photoResponse.urls.small
+        let id = photoResponse.id
+        let photo = Photo(id: id, memo: memo, imageURL: imageURL, date: Date())
         
-        ImageLoadManager.shared.load(photoResponse.urls.small) { data in
-            
-            ImageFileManager.shared.saveImage(id: photoResponse.id, data: data) { success in
-                if success {
-                    let photo = Photo(id: photoResponse.id,
-                                      memo: memo,
-                                      imageURL: photoResponse.urls.thumb,
-                                      date: Date())
-                    
-                    CoreDataManager.shared.savePhotoEntity(photo: photo) {
-                    }
+        ImageFileManager.shared.existImageInFile(id: id) { exist in
+            if !exist {
+                ImageLoadManager.shared.load(imageURL) { data in
+                    ImageFileManager.shared.saveImage(id: id, data: data)
+                    CoreDataManager.shared.savePhotoEntity(photo: photo)
                 }
+            } else {
+                self.delegate?.photoCantSave()
             }
         }
     }

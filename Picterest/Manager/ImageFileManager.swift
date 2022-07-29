@@ -26,14 +26,12 @@ final class ImageFileManager {
         }
     }
     
-    func saveImage(id: String, data: Data, completion: @escaping (Bool) -> Void) {
+    func saveImage(id: String, data: Data) {
         guard let image = UIImage(data: data) else {
-            completion(false)
             return
         }
         
         guard let imageData = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
-            completion(false)
             return
         }
         
@@ -41,10 +39,8 @@ final class ImageFileManager {
         
         do {
             try imageData.write(to: fileURL)
-            completion(true)
         } catch {
             print(error.localizedDescription)
-            completion(false)
         }
     }
     
@@ -54,6 +50,11 @@ final class ImageFileManager {
     
     func fetchImage(id: String) -> UIImage? {
         return UIImage(contentsOfFile: fetchImageURLString(id: id))
+    }
+    
+    func existImageInFile(id: String, completion: @escaping (Bool) -> Void) {
+        let path = fetchImageURLString(id: id)
+        fileManager.fileExists(atPath: path) ? completion(true) : completion(false)
     }
     
     func deleteImage(id: String) {
