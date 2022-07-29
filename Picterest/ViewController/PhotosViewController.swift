@@ -19,7 +19,7 @@ final class PhotosViewController: UIViewController {
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .white
+//        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -48,7 +48,7 @@ extension PhotosViewController {
     }
     
     private func configureView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     private func addSubviews() {

@@ -41,7 +41,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .black
-        stackView.layer.opacity = 0.6
+        stackView.layer.opacity = 0.7
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         return stackView

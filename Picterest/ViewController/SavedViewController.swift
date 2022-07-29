@@ -52,7 +52,7 @@ extension SavedViewController {
     }
     
     private func configureView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     private func addSubviews() {
