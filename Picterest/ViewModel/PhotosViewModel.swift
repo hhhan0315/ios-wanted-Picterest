@@ -58,6 +58,7 @@ final class PhotosViewModel {
                     ImageFileManager.shared.saveImage(id: id, data: data)
                     CoreDataManager.shared.savePhotoEntity(photo: photo)
                     self.photoSaveSuccessTuple = (true, index)
+                    NotificationCenter.default.post(name: Notification.Name.photoSaveSuccess, object: nil)
                 }
             } else {
                 self.photoSaveSuccessTuple = (false, nil)

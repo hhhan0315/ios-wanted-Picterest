@@ -33,10 +33,6 @@ final class SavedViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         viewModel.fetch()
     }
@@ -50,6 +46,7 @@ extension SavedViewController {
         addSubviews()
         makeConstraints()
         bind()
+        configureNotificationCenter()
     }
     
     private func configureView() {
@@ -123,6 +120,21 @@ extension SavedViewController {
             }))
             present(alertController, animated: true)
         }
+    }
+    
+    @objc private func photoSaveSuccess() {
+        viewModel.fetch()
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        }
+    }
+}
+
+// MARK: - Method
+
+extension SavedViewController {
+    private func configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(photoSaveSuccess), name: Notification.Name.photoSaveSuccess, object: nil)
     }
 }
 
