@@ -46,12 +46,5 @@ final class SavedViewModel {
                 }
             }
         }
-        
-//        ImageFileManager.shared.deleteImage(id: photoEntity.id ?? "")
-//        CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) { success in
-//            if success {
-//                self.photoEntities.remove(at: index)
-//            }
-//        }
     }
 }
