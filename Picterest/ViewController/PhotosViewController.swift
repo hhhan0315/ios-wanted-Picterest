@@ -35,11 +35,9 @@ final class PhotosViewController: UIViewController {
         
         viewModel.fetch()
     }
-}
+    
+    // MARK: - Configure Method
 
-// MARK: - UI Method
-
-extension PhotosViewController {
     private func configure() {
         configureView()
         configureNavigation()
@@ -48,7 +46,11 @@ extension PhotosViewController {
         bind()
         configureNotificationCenter()
     }
-    
+}
+
+// MARK: - UI Method
+
+extension PhotosViewController {
     private func configureView() {
         view.backgroundColor = .systemBackground
     }

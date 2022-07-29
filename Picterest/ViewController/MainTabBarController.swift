@@ -39,6 +39,12 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configure()
+    }
+    
+    // MARK: - Configure Method
+
+    private func configure() {
         configureUI()
     }
 }

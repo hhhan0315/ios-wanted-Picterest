@@ -36,11 +36,9 @@ final class SavedViewController: UIViewController {
         
         viewModel.fetch()
     }
-}
-
-// MARK: - UI Method
-
-extension SavedViewController {
+    
+    // MARK: - Configure Method
+    
     private func configure() {
         configureView()
         configureNavigation()
@@ -49,7 +47,11 @@ extension SavedViewController {
         bind()
         configureNotificationCenter()
     }
-    
+}
+
+// MARK: - UI Method
+
+extension SavedViewController {
     private func configureView() {
         view.backgroundColor = .systemBackground
     }

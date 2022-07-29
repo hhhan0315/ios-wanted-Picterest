@@ -70,16 +70,18 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Configure Method
+    
+    private func configure() {
+        addSubviews()
+        makeConstraints()
+    }
 }
 
 // MARK: - UI Method
 
 extension PhotoCollectionViewCell {
-    private func configure() {
-        addSubviews()
-        makeConstraints()
-    }
-    
     private func addSubviews() {
         addSubview(imageView)
         addSubview(topStackView)
