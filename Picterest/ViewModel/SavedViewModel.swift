@@ -8,6 +8,7 @@
 import Foundation
 
 final class SavedViewModel {
+    
     // MARK: - Properties
     
     @Published var photoEntities: [PhotoEntity]

@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 final class PhotosViewController: UIViewController {
+    
     // MARK: - Properties
     
     private lazy var collectionView: UICollectionView = {

@@ -8,6 +8,7 @@
 import UIKit
 
 final class MainTabBarController: UITabBarController {
+    
     // MARK: - Properties
     
     enum MainTabBarItem {

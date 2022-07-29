@@ -8,6 +8,7 @@
 import Foundation
 
 final class PhotosViewModel {
+    
     // MARK: - Properties
     
     @Published var photoResponses: [PhotoResponse]

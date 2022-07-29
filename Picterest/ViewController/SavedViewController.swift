@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 final class SavedViewController: UIViewController {
+    
     // MARK: - Properties
     
     private lazy var collectionView: UICollectionView = {

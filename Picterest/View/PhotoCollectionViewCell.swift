@@ -12,6 +12,7 @@ protocol PhotoCollectionViewCellDelegate: AnyObject {
 }
 
 final class PhotoCollectionViewCell: UICollectionViewCell {
+    
     // MARK: - Properties
     
     static let identifier = String(describing: PhotoCollectionViewCell.self)
