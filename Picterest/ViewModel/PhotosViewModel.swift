@@ -54,7 +54,7 @@ final class PhotosViewModel {
         
         ImageFileManager.shared.existImageInFile(id: id) { exist in
             if !exist {
-                ImageLoadManager.shared.load(imageURL) { data in
+                ImageLoadManager().load(imageURL) { data in
                     ImageFileManager.shared.saveImage(id: id, data: data)
                     CoreDataManager.shared.savePhotoEntity(photo: photo)
                     self.photoSaveSuccessTuple = (true, index)

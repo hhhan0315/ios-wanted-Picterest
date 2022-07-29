@@ -83,6 +83,7 @@ extension PhotosViewController {
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.collectionView.reloadSections(IndexSet(0...0))
+//                self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
             }
             .store(in: &cancellable)
         

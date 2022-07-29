@@ -17,9 +17,9 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: PhotoCollectionViewCell.self)
     
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        return imageView
+    private let lazyImageView: LazyImageView = {
+        let lazyImageView = LazyImageView()
+        return lazyImageView
     }()
     
     private lazy var starButton: UIButton = {
@@ -47,7 +47,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         return stackView
     }()
-        
+    
     weak var delegate: PhotoCollectionViewCellDelegate?
     
     private var currentIndex = -1
@@ -57,7 +57,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        imageView.image = nil
+        lazyImageView.cancelTask()        
         starButtonSelected(false)
     }
     
@@ -83,18 +83,18 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
 
 extension PhotoCollectionViewCell {
     private func addSubviews() {
-        addSubview(imageView)
+        addSubview(lazyImageView)
         addSubview(topStackView)
     }
     
     private func makeConstraints() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        lazyImageView.translatesAutoresizingMaskIntoConstraints = false
         topStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            imageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            lazyImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            lazyImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            lazyImageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            lazyImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             
             topStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             topStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -128,11 +128,7 @@ extension PhotoCollectionViewCell {
         currentIndex = index
         infoLabel.text = "\(index + 1)번째 사진"
         
-        ImageLoadManager.shared.load(photoResponse.urls.thumb) { [weak self] data in
-            DispatchQueue.main.async {
-                self?.imageView.image = UIImage(data: data)
-            }
-        }
+        lazyImageView.loadImage(photoResponse.urls.thumb)
         
         CoreDataManager.shared.isExistPhotoEntity(id: photoResponse.id) { isExist in
             if isExist {
@@ -145,6 +141,6 @@ extension PhotoCollectionViewCell {
         starButtonSelected(true)
         
         infoLabel.text = photoEntity.memo
-        imageView.image = ImageFileManager.shared.fetchImage(id: photoEntity.id ?? "")
+        lazyImageView.image = ImageFileManager.shared.fetchImage(id: photoEntity.id ?? "")
     }
 }

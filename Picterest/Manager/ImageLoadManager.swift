@@ -8,10 +8,7 @@
 import Foundation
 
 final class ImageLoadManager {
-    static let shared = ImageLoadManager()
-    private init() {}
-    
-    private let imageCacheManager = ImageCacheManager()
+    private let imageCacheManager = ImageCacheManager.shared
     
     func load(_ urlString: String, completion: @escaping (Data) -> Void) {
         let key = urlString as NSString

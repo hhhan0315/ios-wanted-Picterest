@@ -8,6 +8,9 @@
 import Foundation
 
 final class ImageCacheManager {
+    static let shared = ImageCacheManager()
+    private init() {}
+    
     private var memory = NSCache<NSString, NSData>()
     
     func save(_ key: NSString, _ data: Data) {
