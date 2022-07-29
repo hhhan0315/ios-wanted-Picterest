@@ -46,9 +46,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         return stackView
     }()
-    
-    private var imageLoadManager = ImageLoadManager()
-    
+        
     weak var delegate: PhotoCollectionViewCellDelegate?
     
     private var currentIndex = -1
@@ -119,7 +117,7 @@ extension PhotoCollectionViewCell {
         currentIndex = index
         infoLabel.text = "\(index + 1)번째 사진"
         
-        imageLoadManager.load(photoResponse.urls.thumb) { [weak self] data in
+        ImageLoadManager.shared.load(photoResponse.urls.thumb) { [weak self] data in
             DispatchQueue.main.async {
                 self?.imageView.image = UIImage(data: data)
             }

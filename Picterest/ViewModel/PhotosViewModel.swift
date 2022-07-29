@@ -46,7 +46,7 @@ final class PhotosViewModel {
     func savePhotoResponse(index: Int, memo: String) {
         let photoResponse = photoResponse(at: index)
         
-        ImageLoadManager().load(photoResponse.urls.small) { data in
+        ImageLoadManager.shared.load(photoResponse.urls.small) { data in
             
             ImageFileManager.shared.saveImage(id: photoResponse.id, data: data) { success in
                 if success {
