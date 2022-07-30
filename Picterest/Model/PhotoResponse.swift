@@ -22,12 +22,8 @@ struct URLs: Decodable {
     let thumb: String
 }
 
-extension PhotoResponse: Hashable {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-
-    static func == (lhs: PhotoResponse, rhs: PhotoResponse) -> Bool {
-        return lhs.id == rhs.id
+extension PhotoResponse {
+    func toPhoto() -> Photo {
+        return Photo(id: id, urlThumb: urls.thumb, urlSmall: urls.small, width: width, height: height)
     }
 }

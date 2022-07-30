@@ -11,13 +11,13 @@ final class PhotosViewModel {
     
     // MARK: - Properties
     
-    @Published var photoResponses: [PhotoResponse]
+    @Published var photos: [Photo]
     @Published var photoSaveSuccessTuple: (success: Bool?, indexPath: IndexPath?)
     private var page: Int
     private let networkManager: NetworkManager
         
     init() {
-        self.photoResponses = []
+        self.photos = []
         self.photoSaveSuccessTuple = (nil, nil)
         self.page = 1
         self.networkManager = NetworkManager()
@@ -25,12 +25,12 @@ final class PhotosViewModel {
     
     // MARK: - Method
     
-    func photoResponsesCount() -> Int {
-        return photoResponses.count
+    func photosCount() -> Int {
+        return photos.count
     }
     
-    func photoResponse(at index: Int) -> PhotoResponse {
-        return photoResponses[index]
+    func photo(at index: Int) -> Photo {
+        return photos[index]
     }
     
     func fetch() {
@@ -38,7 +38,8 @@ final class PhotosViewModel {
         networkManager.fetchData(endpoint: photosEndpoint, dataType: [PhotoResponse].self) { [weak self] result in
             switch result {
             case .success(let photoResponses):
-                self?.photoResponses.append(contentsOf: photoResponses)
+                let photos = photoResponses.map { $0.toPhoto() }
+                self?.photos.append(contentsOf: photos)
                 self?.page += 1
             case .failure(let error):
                 print(error.localizedDescription)
@@ -47,9 +48,9 @@ final class PhotosViewModel {
     }
     
     func savePhotoResponse(indexPath: IndexPath, memo: String) {
-        let photoResponse = photoResponse(at: indexPath.item)
-        let imageURL = photoResponse.urls.small
-        let id = photoResponse.id
+        let photo = photo(at: indexPath.item)
+        let imageURL = photo.urlSmall
+        let id = photo.id
         let photoEntityData = PhotoEntityData(id: id, memo: memo, imageURL: imageURL, date: Date())
         
         ImageFileManager.shared.existImageInFile(id: id) { exist in

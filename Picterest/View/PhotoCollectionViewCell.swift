@@ -127,13 +127,13 @@ extension PhotoCollectionViewCell {
 // MARK: - Public Method
 
 extension PhotoCollectionViewCell {
-    func configureCell(indexPath: IndexPath, photoResponse: PhotoResponse) {
+    func configureCell(indexPath: IndexPath, photo: Photo) {
         currentIndexPath = indexPath
         infoLabel.text = "\(indexPath.item + 1)번째 사진"
         
-        lazyImageView.loadImage(photoResponse.urls.thumb)
+        lazyImageView.loadImage(photo.urlThumb)
         
-        CoreDataManager.shared.isExistPhotoEntity(id: photoResponse.id) { isExist in
+        CoreDataManager.shared.isExistPhotoEntity(id: photo.id) { isExist in
             if isExist {
                 self.starButtonSelected(true)
             }

@@ -29,7 +29,7 @@ final class PhotosViewController: UIViewController {
         return layout
     }()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoResponse>?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Photo>?
     
     private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -84,12 +84,12 @@ extension PhotosViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, PhotoResponse>(collectionView: collectionView, cellProvider: { collectionView, indexPath, photoResponse in
+        dataSource = UICollectionViewDiffableDataSource<Section, Photo>(collectionView: collectionView, cellProvider: { collectionView, indexPath, photo in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
                 return .init()
             }
             
-            cell.configureCell(indexPath: indexPath, photoResponse: photoResponse)
+            cell.configureCell(indexPath: indexPath, photo: photo)
             cell.delegate = self
             return cell
         })
@@ -100,12 +100,12 @@ extension PhotosViewController {
 
 extension PhotosViewController {
     private func bind() {
-        viewModel.$photoResponses
+        viewModel.$photos
             .receive(on: DispatchQueue.main)
-            .sink { photoResponses in
-                var snapShot = NSDiffableDataSourceSnapshot<Section, PhotoResponse>()
+            .sink { photos in
+                var snapShot = NSDiffableDataSourceSnapshot<Section, Photo>()
                 snapShot.appendSections([Section.main])
-                snapShot.appendItems(photoResponses)
+                snapShot.appendItems(photos)
                 self.pinterestLayout.update(numberOfItems: snapShot.numberOfItems)
                 self.dataSource?.apply(snapShot, animatingDifferences: false)
             }
@@ -118,14 +118,14 @@ extension PhotosViewController {
                     return
                 }
                 if success {
-                    guard let photoResponse = self.dataSource?.itemIdentifier(for: indexPath) else {
+                    guard let photo = self.dataSource?.itemIdentifier(for: indexPath) else {
                         return
                     }
                     
                     guard var snapShot = self.dataSource?.snapshot() else {
                         return
                     }
-                    snapShot.reloadItems([photoResponse])
+                    snapShot.reloadItems([photo])
                     self.dataSource?.apply(snapShot, animatingDifferences: false)
                 } else {
                     let alertController = UIAlertController(title: "사진 저장 실패", message: "동일한 사진이 존재합니다.", preferredStyle: .alert)
@@ -162,7 +162,7 @@ extension PhotosViewController {
 
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.item == viewModel.photoResponsesCount() - 1 {
+        if indexPath.item == viewModel.photosCount() - 1 {
             viewModel.fetch()
         }
     }
@@ -173,8 +173,8 @@ extension PhotosViewController: UICollectionViewDelegate {
 extension PhotosViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
         let cellWidth: CGFloat = (view.bounds.width - 4) / 2
-        let imageHeight: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).height)
-        let imageWidth: CGFloat = CGFloat(viewModel.photoResponse(at: indexPath.item).width)
+        let imageHeight: CGFloat = CGFloat(viewModel.photo(at: indexPath.item).height)
+        let imageWidth: CGFloat = CGFloat(viewModel.photo(at: indexPath.item).width)
         let imageRatio = imageHeight / imageWidth
         
         return imageRatio * cellWidth
