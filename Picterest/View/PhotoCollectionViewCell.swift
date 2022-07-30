@@ -140,10 +140,10 @@ extension PhotoCollectionViewCell {
         }
     }
     
-    func configureCell(photoEntity: PhotoEntity) {
+    func configureCell(photoEntityData: PhotoEntityData) {
         starButtonSelected(true)
         
-        infoLabel.text = photoEntity.memo
-        lazyImageView.image = ImageFileManager.shared.fetchImage(id: photoEntity.id ?? "")
+        infoLabel.text = photoEntityData.memo
+        lazyImageView.image = ImageFileManager.shared.fetchImage(id: photoEntityData.id)
     }
 }

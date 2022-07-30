@@ -12,17 +12,23 @@ final class SavedViewController: UIViewController {
     
     // MARK: - Properties
     
+    enum Section {
+        case main
+    }
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout(section: createLayoutSection())
         
         let longPressGesutre = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureRecognized(_:)))
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
+        collectionView.dataSource = dataSource
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.addGestureRecognizer(longPressGesutre)
         return collectionView
     }()
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoEntityData>?
     
     private let viewModel = SavedViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -46,6 +52,7 @@ final class SavedViewController: UIViewController {
         makeConstraints()
         bind()
         configureNotificationCenter()
+        configureDataSource()
     }
 }
 
@@ -86,16 +93,30 @@ extension SavedViewController {
         section.interGroupSpacing = Constants.spacing
         return section
     }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, PhotoEntityData>(collectionView: collectionView, cellProvider: { collectionView, indexPath, photoEntityData in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
+                return .init()
+            }
+            
+            cell.configureCell(photoEntityData: photoEntityData)
+            return cell
+        })
+    }
 }
 
 // MARK: - bind Method
 
 extension SavedViewController {
     private func bind() {
-        viewModel.$photoEntities
+        viewModel.$photoEntityData
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                self.collectionView.reloadSections(IndexSet(0...0))
+            .sink { photoEntityData in
+                var snapShot = NSDiffableDataSourceSnapshot<Section, PhotoEntityData>()
+                snapShot.appendSections([Section.main])
+                snapShot.appendItems(photoEntityData)
+                self.dataSource?.apply(snapShot)
             }
             .store(in: &cancellable)
     }
@@ -132,7 +153,7 @@ extension SavedViewController {
             let alertController = UIAlertController(title: "사진 삭제", message: nil, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
             alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                self.viewModel.deletePhotoEntity(index: indexPath.item)
+                self.viewModel.deletePhotoEntityData(index: indexPath.item)
             }))
             present(alertController, animated: true)
         }
@@ -148,19 +169,19 @@ extension SavedViewController {
 
 // MARK: - UICollectionViewDataSource
 
-extension SavedViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photoEntitiesCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
-            return .init()
-        }
-        
-        let photoEntity = viewModel.photoEntity(at: indexPath.row)
-        cell.configureCell(photoEntity: photoEntity)
-        
-        return cell
-    }
-}
+//extension SavedViewController: UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return viewModel.photoEntitiesCount()
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
+//            return .init()
+//        }
+//        
+//        let photoEntity = viewModel.photoEntity(at: indexPath.row)
+//        cell.configureCell(photoEntity: photoEntity)
+//        
+//        return cell
+//    }
+//}

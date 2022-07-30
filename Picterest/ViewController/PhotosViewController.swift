@@ -19,6 +19,7 @@ final class PhotosViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: pinterestLayout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        collectionView.dataSource = dataSource
         collectionView.delegate = self
         return collectionView
     }()

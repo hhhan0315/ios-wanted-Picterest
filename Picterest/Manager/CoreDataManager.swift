@@ -63,11 +63,8 @@ final class CoreDataManager {
         }
     }
     
-    func deletePhotoEntity(photoEntity: PhotoEntity, completion: @escaping (Bool) -> Void) {
-        guard let id = photoEntity.id else {
-            completion(false)
-            return
-        }
+    func deletePhotoEntity(photoEntityData: PhotoEntityData, completion: @escaping (Bool) -> Void) {
+        let id = photoEntityData.id
         
         let request = PhotoEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id = %@", id as CVarArg)

@@ -20,7 +20,7 @@ extension Photo: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(uuid)
     }
-
+    
     static func == (lhs: Photo, rhs: Photo) -> Bool {
         return lhs.uuid == rhs.uuid
     }

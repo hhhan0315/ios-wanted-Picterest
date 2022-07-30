@@ -11,38 +11,38 @@ final class SavedViewModel {
     
     // MARK: - Properties
     
-    @Published var photoEntities: [PhotoEntity]
+//    @Published var photoEntities: [PhotoEntity]
+    @Published var photoEntityData: [PhotoEntityData]
     
     init() {
-        self.photoEntities = []
+        self.photoEntityData = []
     }
     
     // MARK: - Method
     
-    func photoEntitiesCount() -> Int {
-        return photoEntities.count
+    func photoEntityDataCount() -> Int {
+        return photoEntityData.count
     }
     
-    func photoEntity(at index: Int) -> PhotoEntity {
-        return photoEntities[index]
+    func photoEntityData(at index: Int) -> PhotoEntityData {
+        return photoEntityData[index]
     }
     
     func fetch() {
-        photoEntities = CoreDataManager.shared.fetchPhotoEntity()
+        let photoEntityData = CoreDataManager.shared.fetchPhotoEntity().map { $0.toPhotoEntityData() }
+        self.photoEntityData = photoEntityData
     }
     
-    func deletePhotoEntity(index: Int) {
-        let photoEntity = photoEntities[index]
-        guard let id = photoEntity.id else {
-            return
-        }
+    func deletePhotoEntityData(index: Int) {
+        let photoEntityData = photoEntityData[index]
+        let id = photoEntityData.id
         
         ImageFileManager.shared.existImageInFile(id: id) { exist in
             if exist {
                 ImageFileManager.shared.deleteImage(id: id)
-                CoreDataManager.shared.deletePhotoEntity(photoEntity: photoEntity) { success in
+                CoreDataManager.shared.deletePhotoEntity(photoEntityData: photoEntityData) { success in
                     if success {
-                        self.photoEntities.remove(at: index)
+                        self.photoEntityData.remove(at: index)
                         NotificationCenter.default.post(name: NSNotification.Name.photoDeleteSuccess, object: nil)
                     }
                 }

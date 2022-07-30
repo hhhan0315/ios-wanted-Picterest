@@ -13,3 +13,13 @@ struct PhotoEntityData {
     let imageURL: String
     let date: Date
 }
+
+extension PhotoEntityData: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: PhotoEntityData, rhs: PhotoEntityData) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

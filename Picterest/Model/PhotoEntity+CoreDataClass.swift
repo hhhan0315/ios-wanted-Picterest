@@ -30,3 +30,12 @@ extension PhotoEntity {
 extension PhotoEntity : Identifiable {
 
 }
+
+extension PhotoEntity {
+    func toPhotoEntityData() -> PhotoEntityData {
+        return PhotoEntityData(id: id ?? "",
+                               memo: memo ?? "",
+                               imageURL: imageURL ?? "",
+                               date: date ?? Date())
+    }
+}
