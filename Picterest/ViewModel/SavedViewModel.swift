@@ -11,7 +11,6 @@ final class SavedViewModel {
     
     // MARK: - Properties
     
-//    @Published var photoEntities: [PhotoEntity]
     @Published var photoEntityData: [PhotoEntityData]
     
     init() {
@@ -44,7 +43,6 @@ final class SavedViewModel {
                     if success {
                         self.photoEntityData.remove(at: index)
                         completion()
-//                        NotificationCenter.default.post(name: NSNotification.Name.photoDeleteSuccess, object: nil)
                     }
                 }
             }
