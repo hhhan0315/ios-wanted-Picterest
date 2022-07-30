@@ -45,15 +45,15 @@ final class CoreDataManager {
         }
     }
     
-    func savePhotoEntity(photo: Photo) {
+    func savePhotoEntity(photoEntityData: PhotoEntityData) {
         let entity = NSEntityDescription.entity(forEntityName: CoreDataConstants.entityName, in: context)
         
         if let entity = entity {
             let managedObject = NSManagedObject(entity: entity, insertInto: context)
-            managedObject.setValue(photo.id, forKey: "id")
-            managedObject.setValue(photo.memo, forKey: "memo")
-            managedObject.setValue(photo.imageURL, forKey: "imageURL")
-            managedObject.setValue(photo.date, forKey: "date")
+            managedObject.setValue(photoEntityData.id, forKey: "id")
+            managedObject.setValue(photoEntityData.memo, forKey: "memo")
+            managedObject.setValue(photoEntityData.imageURL, forKey: "imageURL")
+            managedObject.setValue(photoEntityData.date, forKey: "date")
             
             do {
                 try context.save()

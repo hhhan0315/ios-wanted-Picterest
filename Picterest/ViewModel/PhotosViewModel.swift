@@ -50,13 +50,13 @@ final class PhotosViewModel {
         let photoResponse = photoResponse(at: indexPath.item)
         let imageURL = photoResponse.urls.small
         let id = photoResponse.id
-        let photo = Photo(id: id, memo: memo, imageURL: imageURL, date: Date())
+        let photoEntityData = PhotoEntityData(id: id, memo: memo, imageURL: imageURL, date: Date())
         
         ImageFileManager.shared.existImageInFile(id: id) { exist in
             if !exist {
                 ImageLoadManager().load(imageURL) { data in
                     ImageFileManager.shared.saveImage(id: id, data: data)
-                    CoreDataManager.shared.savePhotoEntity(photo: photo)
+                    CoreDataManager.shared.savePhotoEntity(photoEntityData: photoEntityData)
                     self.photoSaveSuccessTuple = (true, indexPath)
                     NotificationCenter.default.post(name: Notification.Name.photoSaveSuccess, object: nil)
                 }

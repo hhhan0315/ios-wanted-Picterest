@@ -1,5 +1,5 @@
 //
-//  Photo.swift
+//  PhotoEntityData.swift
 //  Picterest
 //
 //  Created by rae on 2022/07/27.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photo {
+struct PhotoEntityData {
     let id: String
     let memo: String
     let imageURL: String
