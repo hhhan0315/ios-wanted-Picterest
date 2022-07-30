@@ -12,16 +12,24 @@ final class PhotosViewController: UIViewController {
     
     // MARK: - Properties
     
+    enum Section {
+        case main
+    }
+    
     private lazy var collectionView: UICollectionView = {
-        let layout = PinterestLayout()
-        layout.delegate = self
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: pinterestLayout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
-        collectionView.dataSource = self
         collectionView.delegate = self
         return collectionView
     }()
+    
+    private lazy var pinterestLayout: PinterestLayout = {
+        let layout = PinterestLayout()
+        layout.delegate = self
+        return layout
+    }()
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoResponse>?
     
     private let viewModel = PhotosViewModel()
     private var cancellable = Set<AnyCancellable>()
@@ -45,6 +53,7 @@ final class PhotosViewController: UIViewController {
         makeConstraints()
         bind()
         configureNotificationCenter()
+        configureDataSource()
     }
 }
 
@@ -73,6 +82,18 @@ extension PhotosViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
+    
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, PhotoResponse>(collectionView: collectionView, cellProvider: { collectionView, indexPath, photoResponse in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
+                return .init()
+            }
+            
+            cell.configureCell(indexPath: indexPath, photoResponse: photoResponse)
+            cell.delegate = self
+            return cell
+        })
+    }
 }
 
 // MARK: - bind Method
@@ -81,20 +102,31 @@ extension PhotosViewController {
     private func bind() {
         viewModel.$photoResponses
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                self.collectionView.reloadSections(IndexSet(0...0))
-//                self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            .sink { photoResponses in
+                var snapShot = NSDiffableDataSourceSnapshot<Section, PhotoResponse>()
+                snapShot.appendSections([Section.main])
+                snapShot.appendItems(photoResponses)
+                self.pinterestLayout.update(numberOfItems: snapShot.numberOfItems)
+                self.dataSource?.apply(snapShot, animatingDifferences: false)
             }
             .store(in: &cancellable)
         
         viewModel.$photoSaveSuccessTuple
             .receive(on: DispatchQueue.main)
-            .sink { photoSaveSuccess in
-                guard let success = photoSaveSuccess.success, let index = photoSaveSuccess.index else {
+            .sink { photoSaveSuccessTuple in
+                guard let success = photoSaveSuccessTuple.success, let indexPath = photoSaveSuccessTuple.indexPath else {
                     return
                 }
                 if success {
-                    self.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+                    guard let photoResponse = self.dataSource?.itemIdentifier(for: indexPath) else {
+                        return
+                    }
+                    
+                    guard var snapShot = self.dataSource?.snapshot() else {
+                        return
+                    }
+                    snapShot.reloadItems([photoResponse])
+                    self.dataSource?.apply(snapShot, animatingDifferences: false)
                 } else {
                     let alertController = UIAlertController(title: "사진 저장 실패", message: "동일한 사진이 존재합니다.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "확인", style: .default))
@@ -117,29 +149,12 @@ extension PhotosViewController {
 
 extension PhotosViewController {
     @objc private func photoDeleteSuccess() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadSections(IndexSet(0...0))
-        }
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension PhotosViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.photoResponsesCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
-            return .init()
+        guard var snapShot = self.dataSource?.snapshot() else {
+            return
         }
         
-        let photoResponse = viewModel.photoResponse(at: indexPath.item)
-        cell.configureCell(index: indexPath.item, photoResponse: photoResponse)
-        cell.delegate = self
-        
-        return cell
+        snapShot.reloadSections([Section.main])
+        dataSource?.apply(snapShot)
     }
 }
 
@@ -169,12 +184,12 @@ extension PhotosViewController: PinterestLayoutDelegate {
 // MARK: - PhotoCollectionViewCellDelegate
 
 extension PhotosViewController: PhotoCollectionViewCellDelegate {
-    func cellStarButtonClicked(index: Int) {
-        let alertController = UIAlertController(title: "메모 입력", message: "\(index + 1)번째 사진을 추가하시겠습니까?", preferredStyle: .alert)
+    func cellStarButtonClicked(indexPath: IndexPath) {
+        let alertController = UIAlertController(title: "메모 입력", message: "\(indexPath.item + 1)번째 사진을 추가하시겠습니까?", preferredStyle: .alert)
         alertController.addTextField()
         alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
         alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-            self.viewModel.savePhotoResponse(index: index, memo: alertController.textFields?.first?.text ?? "")
+            self.viewModel.savePhotoResponse(indexPath: indexPath, memo: alertController.textFields?.first?.text ?? "")
         }))
         self.present(alertController, animated: true)
     }

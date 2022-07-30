@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PhotoCollectionViewCellDelegate: AnyObject {
-    func cellStarButtonClicked(index: Int)
+    func cellStarButtonClicked(indexPath: IndexPath)
 }
 
 final class PhotoCollectionViewCell: UICollectionViewCell {
@@ -50,7 +50,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: PhotoCollectionViewCellDelegate?
     
-    private var currentIndex: Int?
+    private var currentIndexPath: IndexPath?
     
     // MARK: - Override Method
     
@@ -108,10 +108,10 @@ extension PhotoCollectionViewCell {
 
 extension PhotoCollectionViewCell {
     @objc private func touchStarButton(_ sender: UIButton) {
-        guard let currentIndex = currentIndex else {
+        guard let currentIndexPath = currentIndexPath else {
             return
         }
-        delegate?.cellStarButtonClicked(index: currentIndex)
+        delegate?.cellStarButtonClicked(indexPath: currentIndexPath)
     }
 }
 
@@ -127,9 +127,9 @@ extension PhotoCollectionViewCell {
 // MARK: - Public Method
 
 extension PhotoCollectionViewCell {
-    func configureCell(index: Int, photoResponse: PhotoResponse) {
-        currentIndex = index
-        infoLabel.text = "\(index + 1)번째 사진"
+    func configureCell(indexPath: IndexPath, photoResponse: PhotoResponse) {
+        currentIndexPath = indexPath
+        infoLabel.text = "\(indexPath.item + 1)번째 사진"
         
         lazyImageView.loadImage(photoResponse.urls.thumb)
         

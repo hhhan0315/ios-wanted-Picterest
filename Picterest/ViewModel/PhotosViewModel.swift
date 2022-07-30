@@ -12,7 +12,7 @@ final class PhotosViewModel {
     // MARK: - Properties
     
     @Published var photoResponses: [PhotoResponse]
-    @Published var photoSaveSuccessTuple: (success: Bool?, index: Int?)
+    @Published var photoSaveSuccessTuple: (success: Bool?, indexPath: IndexPath?)
     private var page: Int
     private let networkManager: NetworkManager
         
@@ -46,8 +46,8 @@ final class PhotosViewModel {
         }
     }
     
-    func savePhotoResponse(index: Int, memo: String) {
-        let photoResponse = photoResponse(at: index)
+    func savePhotoResponse(indexPath: IndexPath, memo: String) {
+        let photoResponse = photoResponse(at: indexPath.item)
         let imageURL = photoResponse.urls.small
         let id = photoResponse.id
         let photo = Photo(id: id, memo: memo, imageURL: imageURL, date: Date())
@@ -57,11 +57,11 @@ final class PhotosViewModel {
                 ImageLoadManager().load(imageURL) { data in
                     ImageFileManager.shared.saveImage(id: id, data: data)
                     CoreDataManager.shared.savePhotoEntity(photo: photo)
-                    self.photoSaveSuccessTuple = (true, index)
+                    self.photoSaveSuccessTuple = (true, indexPath)
                     NotificationCenter.default.post(name: Notification.Name.photoSaveSuccess, object: nil)
                 }
             } else {
-                self.photoSaveSuccessTuple = (false, nil)
+                self.photoSaveSuccessTuple = (false, indexPath)
             }
         }
     }

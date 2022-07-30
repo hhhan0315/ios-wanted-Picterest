@@ -24,6 +24,8 @@ final class PinterestLayout: UICollectionViewLayout {
         return collectionView.bounds.width - (insets.left + insets.right)
     }
     
+    private var numberOfItems = 0
+    
     // 콜렉션 뷰 콘텐츠 사이즈
     override var collectionViewContentSize: CGSize {
         return CGSize(width: contentWidth, height: contentHeight)
@@ -54,7 +56,7 @@ final class PinterestLayout: UICollectionViewLayout {
         // 현재 행의 위치
         var column = 0
         
-        for item in 0..<collectionView.numberOfItems(inSection: 0) {
+        for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: 0)
             
             let photoHeight = delegate?.collectionView(collectionView, heightForPhotoAtIndexPath: indexPath) ?? 180
@@ -91,5 +93,9 @@ final class PinterestLayout: UICollectionViewLayout {
     // 모든 셀의 레이아웃 정보 리턴 (indexPath로 요청 들어올 경우)
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cache[indexPath.item]
+    }
+    
+    func update(numberOfItems: Int) {
+        self.numberOfItems = numberOfItems
     }
 }

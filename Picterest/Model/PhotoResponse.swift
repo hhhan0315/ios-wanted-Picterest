@@ -21,3 +21,13 @@ struct URLs: Decodable {
     let small: String
     let thumb: String
 }
+
+extension PhotoResponse: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: PhotoResponse, rhs: PhotoResponse) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
