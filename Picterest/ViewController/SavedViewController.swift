@@ -23,6 +23,7 @@ final class SavedViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = dataSource
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
         collectionView.addGestureRecognizer(longPressGesutre)
         return collectionView
