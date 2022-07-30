@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		010D2E7F289128BA0041399C /* SavedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D2E7E289128BA0041399C /* SavedViewModel.swift */; };
-		010D2E832893BE840041399C /* NotificaitonName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D2E822893BE840041399C /* NotificaitonName+Extension.swift */; };
 		010D2E8C28940AF20041399C /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D2E8B28940AF20041399C /* LazyImageView.swift */; };
 		010D2E8E2894BE0B0041399C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D2E8D2894BE0B0041399C /* Photo.swift */; };
 		01190522288ED0900087B36B /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01190521288ED0900087B36B /* ImageCacheManager.swift */; };
@@ -38,7 +37,6 @@
 
 /* Begin PBXFileReference section */
 		010D2E7E289128BA0041399C /* SavedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewModel.swift; sourceTree = "<group>"; };
-		010D2E822893BE840041399C /* NotificaitonName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificaitonName+Extension.swift"; sourceTree = "<group>"; };
 		010D2E8B28940AF20041399C /* LazyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		010D2E8D2894BE0B0041399C /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		01190521288ED0900087B36B /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
@@ -79,14 +77,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		010D2E842893BED00041399C /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				010D2E822893BE840041399C /* NotificaitonName+Extension.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		01190523288ED0930087B36B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,7 +185,6 @@
 				01190523288ED0930087B36B /* Manager */,
 				01E22D99288E834B00F46475 /* Network */,
 				01190546288FC7080087B36B /* Layout */,
-				010D2E842893BED00041399C /* Extension */,
 				DE15E66928604279003DD2F5 /* Info.plist */,
 				0185CDB32890D50900E0666E /* Picterest.xcdatamodeld */,
 			);
@@ -276,7 +265,6 @@
 				01E22DA7288E8F8000F46475 /* PhotoResponse.swift in Sources */,
 				DE15E65C28604278003DD2F5 /* AppDelegate.swift in Sources */,
 				01190541288FAEDF0087B36B /* MainTabBarController.swift in Sources */,
-				010D2E832893BE840041399C /* NotificaitonName+Extension.swift in Sources */,
 				01E22D9B288E835300F46475 /* Endpoint.swift in Sources */,
 				0185CDBC2890D6A000E0666E /* PhotoEntity+CoreDataClass.swift in Sources */,
 				019B1BD9288E428D00A47E5C /* PhotosViewController.swift in Sources */,

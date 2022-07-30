@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol PhotosViewControllerDelegate: AnyObject {
+    func photoSaveSuccess()
+}
+
 final class PhotosViewController: UIViewController {
     
     // MARK: - Properties
@@ -34,7 +38,10 @@ final class PhotosViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Photo>?
     
     private let viewModel = PhotosViewModel()
+    
     private var cancellable = Set<AnyCancellable>()
+    
+    weak var delegate: PhotosViewControllerDelegate?
     
     // MARK: - Override Method
     
@@ -54,7 +61,6 @@ final class PhotosViewController: UIViewController {
         addSubviews()
         makeConstraints()
         bind()
-        configureNotificationCenter()
         configureDataSource()
     }
 }
@@ -129,6 +135,7 @@ extension PhotosViewController {
                     }
                     snapShot.reloadItems([photo])
                     self.dataSource?.apply(snapShot, animatingDifferences: false)
+                    self.delegate?.photoSaveSuccess()
                 } else {
                     let alertController = UIAlertController(title: "사진 저장 실패", message: "동일한 사진이 존재합니다.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "확인", style: .default))
@@ -136,27 +143,6 @@ extension PhotosViewController {
                 }
             }
             .store(in: &cancellable)
-    }
-}
-
-// MARK: - Method
-
-extension PhotosViewController {
-    private func configureNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(photoDeleteSuccess), name: Notification.Name.photoDeleteSuccess, object: nil)
-    }
-}
-
-// MARK: - objc Method
-
-extension PhotosViewController {
-    @objc private func photoDeleteSuccess() {
-        guard var snapShot = self.dataSource?.snapshot() else {
-            return
-        }
-        
-        snapShot.reloadSections([Section.main])
-        dataSource?.apply(snapShot)
     }
 }
 
@@ -194,5 +180,18 @@ extension PhotosViewController: PhotoCollectionViewCellDelegate {
             self.viewModel.savePhotoResponse(indexPath: indexPath, memo: alertController.textFields?.first?.text ?? "")
         }))
         self.present(alertController, animated: true)
+    }
+}
+
+// MARK: - SavedViewControllerDelegate
+
+extension PhotosViewController: SavedViewControllerDelegate {
+    func photoDeleteSuccess() {
+        guard var snapShot = self.dataSource?.snapshot() else {
+            return
+        }
+
+        snapShot.reloadSections([Section.main])
+        dataSource?.apply(snapShot)
     }
 }

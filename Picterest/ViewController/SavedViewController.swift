@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol SavedViewControllerDelegate: AnyObject {
+    func photoDeleteSuccess()
+}
+
 final class SavedViewController: UIViewController {
     
     // MARK: - Properties
@@ -32,7 +36,10 @@ final class SavedViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, PhotoEntityData>?
     
     private let viewModel = SavedViewModel()
+    
     private var cancellable = Set<AnyCancellable>()
+    
+    weak var delegate: SavedViewControllerDelegate?
     
     // MARK: - Override Method
     
@@ -52,7 +59,6 @@ final class SavedViewController: UIViewController {
         addSubviews()
         makeConstraints()
         bind()
-        configureNotificationCenter()
         configureDataSource()
     }
 }
@@ -123,14 +129,6 @@ extension SavedViewController {
     }
 }
 
-// MARK: - Method
-
-extension SavedViewController {
-    private func configureNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(photoSaveSuccess), name: Notification.Name.photoSaveSuccess, object: nil)
-    }
-}
-
 // MARK: - objc Method
 
 extension SavedViewController {
@@ -154,35 +152,22 @@ extension SavedViewController {
             let alertController = UIAlertController(title: "사진 삭제", message: nil, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "취소", style: .cancel))
             alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: { _ in
-                self.viewModel.deletePhotoEntityData(index: indexPath.item)
+                self.viewModel.deletePhotoEntityData(index: indexPath.item) {
+                    self.delegate?.photoDeleteSuccess()
+                }
             }))
             present(alertController, animated: true)
         }
     }
-    
-    @objc private func photoSaveSuccess() {
+}
+
+// MARK: - PhotosViewControllerDelegate
+
+extension SavedViewController: PhotosViewControllerDelegate {
+    func photoSaveSuccess() {
         viewModel.fetch()
         DispatchQueue.main.async {
             self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         }
     }
 }
-
-// MARK: - UICollectionViewDataSource
-
-//extension SavedViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.photoEntitiesCount()
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
-//            return .init()
-//        }
-//        
-//        let photoEntity = viewModel.photoEntity(at: indexPath.row)
-//        cell.configureCell(photoEntity: photoEntity)
-//        
-//        return cell
-//    }
-//}

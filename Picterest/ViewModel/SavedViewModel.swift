@@ -33,7 +33,7 @@ final class SavedViewModel {
         self.photoEntityData = photoEntityData
     }
     
-    func deletePhotoEntityData(index: Int) {
+    func deletePhotoEntityData(index: Int, completion: @escaping () -> Void) {
         let photoEntityData = photoEntityData[index]
         let id = photoEntityData.id
         
@@ -43,7 +43,8 @@ final class SavedViewModel {
                 CoreDataManager.shared.deletePhotoEntity(photoEntityData: photoEntityData) { success in
                     if success {
                         self.photoEntityData.remove(at: index)
-                        NotificationCenter.default.post(name: NSNotification.Name.photoDeleteSuccess, object: nil)
+                        completion()
+//                        NotificationCenter.default.post(name: NSNotification.Name.photoDeleteSuccess, object: nil)
                     }
                 }
             }

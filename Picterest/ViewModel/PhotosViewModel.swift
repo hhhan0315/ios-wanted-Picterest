@@ -59,7 +59,9 @@ final class PhotosViewModel {
                     ImageFileManager.shared.saveImage(id: id, data: data)
                     CoreDataManager.shared.savePhotoEntity(photoEntityData: photoEntityData)
                     self.photoSaveSuccessTuple = (true, indexPath)
-                    NotificationCenter.default.post(name: Notification.Name.photoSaveSuccess, object: nil)
+                    
+                    // 뷰컨에서 델리게이트 패턴으로 전달
+//                    NotificationCenter.default.post(name: Notification.Name.photoSaveSuccess, object: nil)
                 }
             } else {
                 self.photoSaveSuccessTuple = (false, indexPath)
